@@ -27,7 +27,7 @@
                 android:text="New Party" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnRefreshPartyList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -39,26 +39,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <ListView
+                android:id="@+id/partyListLV"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="334dp"
-                    android:text="Hello World!"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
-            </LinearLayout>
+            </ListView>
 
         </LinearLayout>
 
