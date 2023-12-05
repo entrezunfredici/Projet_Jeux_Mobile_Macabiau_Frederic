@@ -16,6 +16,5 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Button bDiscontinued=findViewById(R.id.btnDiscontinuedParty);
-
     }
 }
