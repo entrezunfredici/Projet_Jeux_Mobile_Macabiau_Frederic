@@ -1,42 +1,41 @@
 package com.example.projetjeuxechecmacabiaufrederic;
+
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 public class Cases extends View {
-    private String position;
-    private int size;
-    private int top_margin;
-    private int left_margin;
     private int [] color={255,0,0,0};
-    private String imageLink;
     public Cases(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+    private String imageLink="NULL";
 
-    public void SetImage(String comparePosition, String addImageLink){
-        if(position==comparePosition){
-            imageLink=addImageLink;
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        int hauteur = getMeasuredHeight();
+        int largeur = getMeasuredWidth();
+        Paint paint = new Paint();
+        paint.setARGB(color[0],color[1],color[2],color[3]);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(largeur,hauteur,0,0, paint);
+        if(imageLink=="NULL"){
+
         }
     }
 
-    public void SetColor(String comparePosition, int[] newColor){
-        if(position==comparePosition){
-            for(int i=1; i<4; i++){
-                color[i]=newColor[i];
-            }
+    public void setImage(String addImageLink){
+        imageLink=addImageLink;
+    }
+
+    public void defColor(int[] newColor){
+        Log.v("MyActivity","new color");
+        for(int i=1; i<4; i++){
+            color[i]=newColor[i];
         }
-    }
-
-    public String GetImage(){
-        return imageLink;
-    }
-
-    public int[] GetColor(){
-        return color;
     }
 }
