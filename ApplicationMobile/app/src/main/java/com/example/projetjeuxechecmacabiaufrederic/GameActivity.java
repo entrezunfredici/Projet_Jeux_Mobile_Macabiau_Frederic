@@ -3,6 +3,7 @@ package com.example.projetjeuxechecmacabiaufrederic;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,17 +12,18 @@ public class GameActivity extends AppCompatActivity {
     private static final int[] casesColor2 = {255, 232, 220, 202};
     private static final int[] casesColorGreen = {255, 9, 106, 9};
     private static final int[] casesColorRed = {255, 240, 0, 32};
-    private Cases[][] echiquier = new Cases[9][9];
+    private Cases[][] echiquier = new Cases[8][8];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Button bDiscontinued = findViewById(R.id.btnDiscontinuedParty);
+        EditText player = findViewById(R.id.player);
         Log.v("log","ready top play");
-        for (int i = 1; i < 9; i++) {
-            for (int k = 1; k < 9; k++) {
-                String identifier = "Case" + i;
-                switch (k) {
+        for (int i = 0; i < 8; i++) {
+            for (int k = 0; k < 8; k++) {
+                String identifier = "Case" + (i+1);
+                switch ((k+1)) {
                     case 1:
                         identifier = identifier + "A";
                         break;
@@ -32,19 +34,19 @@ public class GameActivity extends AppCompatActivity {
                         identifier = identifier + "C";
                         break;
                     case 4:
-                            identifier = identifier + "D";
+                        identifier = identifier + "D";
                         break;
                     case 5:
-                            identifier = identifier + "E";
+                        identifier = identifier + "E";
                         break;
                     case 6:
-                            identifier = identifier + "F";
+                        identifier = identifier + "F";
                         break;
                     case 7:
-                            identifier = identifier + "G";
+                        identifier = identifier + "G";
                         break;
                     default:
-                            identifier = identifier + "H";
+                        identifier = identifier + "H";
                         break;
                 }
                 echiquier[i][k] = findViewById(getResources().getIdentifier(identifier, "id", getPackageName()));

@@ -3,7 +3,7 @@ Liste des fonctionnalités implémentées :
 [ ] Ecriture/lecture dans un Fichier
 [ ] Utilisation de SQLite
 [ ] Utilisation de Room
-[ ] Utilisation de Firebase
+[x] Utilisation de Firebase
 [ ] Nombre d'activités ou fragment supérieur ou égal à 3
 [ ] Gestion du bouton Back (message pour confirmer que l'on veut réellement quitter l'application)
 [x] L'affichage d'une liste avec son adapter
