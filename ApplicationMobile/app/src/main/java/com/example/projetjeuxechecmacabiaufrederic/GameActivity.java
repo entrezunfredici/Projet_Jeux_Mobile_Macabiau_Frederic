@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +19,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Button bDiscontinued = findViewById(R.id.btnDiscontinuedParty);
-        EditText player = findViewById(R.id.player);
+        TextView player = findViewById(R.id.player);
         Log.v("log","ready top play");
         for (int i = 0; i < 8; i++) {
             for (int k = 0; k < 8; k++) {
@@ -50,14 +51,14 @@ public class GameActivity extends AppCompatActivity {
                         break;
                 }
                 echiquier[i][k] = findViewById(getResources().getIdentifier(identifier, "id", getPackageName()));
-                if ((i%2)==0) {
+                if (((i+1)%2)==0) {
                     if ((k%2)==0) {
                         echiquier[i][k].defColor(casesColor1);
                     } else {
                         echiquier[i][k].defColor(casesColor2);
                     }
                 } else {
-                    if ((k%2)==0) {
+                    if (((k+1)%2)==0) {
                         echiquier[i][k].defColor(casesColor2);
                     } else {
                         echiquier[i][k].defColor(casesColor1);

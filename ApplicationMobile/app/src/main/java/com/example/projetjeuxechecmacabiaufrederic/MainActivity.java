@@ -1,5 +1,6 @@
 package com.example.projetjeuxechecmacabiaufrederic;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,11 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +25,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -64,11 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 /*Intent game = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(game);*/
                 /*GameActivity game = new GameActivity();
-                   game.onCreate(savedInstanceState);*/
+                game.onCreate(savedInstanceState);*/
                 //normalement dans une autre classe
                 int[] casesColor1 = {255, 67, 47, 20};
                 int[] casesColor2 = {255, 232, 220, 202};
-                Cases[][] echiquier = new Cases[8][8];
+                final Cases[][][] echiquier = {new Cases[8][8]};
                 Online.setValue(iParty+1);
                 String partyID="party"+iParty;
                 Online.addValueEventListener(new ValueEventListener() {
@@ -77,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
                         int value = dataSnapshot.getValue(int.class);
-                        Log.v("Number_of_party",value+" ");
-
                     }
                     @Override
                     public void onCancelled(DatabaseError error) {
@@ -88,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 });
                 setContentView(R.layout.activity_game);
                 Button bDiscontinued = findViewById(R.id.btnDiscontinuedParty);
-                EditText player = findViewById(R.id.player);
+                TextView player = findViewById(R.id.player);
                 Log.v("log","ready top play");
                 for (int i = 0; i < 8; i++) {
                     for (int k = 0; k < 8; k++) {
@@ -119,22 +124,23 @@ public class MainActivity extends AppCompatActivity {
                                 identifier = identifier + "H";
                                 break;
                         }
-                        echiquier[i][k] = findViewById(getResources().getIdentifier(identifier, "id", getPackageName()));
+                        echiquier[0][i][k] = findViewById(getResources().getIdentifier(identifier, "id", getPackageName()));
                         if ((i%2)==0) {
                              if ((k%2)==0) {
-                                 echiquier[i][k].defColor(casesColor1);
+                                 echiquier[0][i][k].defColor(casesColor1);
                              } else {
-                                 echiquier[i][k].defColor(casesColor2);
+                                 echiquier[0][i][k].defColor(casesColor2);
                             }
                         } else {
                             if ((k%2)==0) {
-                                echiquier[i][k].defColor(casesColor2);
+                                echiquier[0][i][k].defColor(casesColor2);
                             } else {
-                                echiquier[i][k].defColor(casesColor1);
+                                echiquier[0][i][k].defColor(casesColor1);
                             }
                         }
                     }
                 }
+                Boolean party=FALSE;
                 new Thread(new Runnable(){
                     public void run(){
                         DatabaseReference partyName = database.getReference(partyID);
@@ -145,9 +151,38 @@ public class MainActivity extends AppCompatActivity {
                             partyName.setValue("black");
                         }
                     }
-                });
+                }).start();
+                //timers
+                final int[] setTimer = {20,0}; //minutes
+                TextView timeRemainingToPlay=findViewById(R.id.timeRemainingToPlay);
+                TextView gameDuration=findViewById(R.id.gameDuration);
+                new Thread(new Runnable(){
+                    public void run(){
+                        int[] chrono={0,0};
+                        /*if(setTimer[0] >0){
+                        if(setTimer[1]==0){
+                            setTimer[1]=60;
+                            setTimer[0]--;
+                        }else{
+                           setTimer[1]--;
+                        }
+                        timeRemainingToPlay.setText(setTimer[0]+":"+setTimer[1]);
+                        }*/
+                        chrono[1]++;
+                        if(chrono[1]==60){
+                            chrono[1]=0;
+                            chrono[0]++;
+                        }
+                        String text=""+chrono[0]+":"+chrono[1];
+                        gameDuration.setText(text);
+                        if(party){
+                            new Handler().postDelayed(this::run,1000);
+                        }
+                    }
+                }).start();
             }
         });
+
         bRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
