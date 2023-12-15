@@ -61,91 +61,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //creation d'une partie
-                /*Intent game = new Intent(getApplicationContext(), GameActivity.class);
-                startActivity(game);*/
+                Intent game = new Intent(getApplicationContext(), GameActivity.class);
+                startActivity(game);
                 /*GameActivity game = new GameActivity();
                    game.onCreate(savedInstanceState);*/
-                //normalement dans une autre classe
-                int[] casesColor1 = {255, 67, 47, 20};
-                int[] casesColor2 = {255, 232, 220, 202};
-                Cases[][] echiquier = new Cases[8][8];
-                Online.setValue(iParty+1);
-                String partyID="party"+iParty;
-                Online.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        int value = dataSnapshot.getValue(int.class);
-                        Log.v("Number_of_party",value+" ");
-
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w("APPX", "Failed to read value.", error.toException());
-                    }
-                });
-                setContentView(R.layout.activity_game);
-                Button bDiscontinued = findViewById(R.id.btnDiscontinuedParty);
-                EditText player = findViewById(R.id.player);
-                Log.v("log","ready top play");
-                for (int i = 0; i < 8; i++) {
-                    for (int k = 0; k < 8; k++) {
-                        String identifier = "Case" + (i+1);
-                        switch ((k+1)) {
-                            case 1:
-                                identifier = identifier + "A";
-                                break;
-                            case 2:
-                                identifier = identifier + "B";
-                            break;
-                            case 3:
-                                identifier = identifier + "C";
-                                break;
-                            case 4:
-                                identifier = identifier + "D";
-                                break;
-                            case 5:
-                                identifier = identifier + "E";
-                                break;
-                            case 6:
-                                identifier = identifier + "F";
-                                break;
-                            case 7:
-                                identifier = identifier + "G";
-                                break;
-                            default:
-                                identifier = identifier + "H";
-                                break;
-                        }
-                        echiquier[i][k] = findViewById(getResources().getIdentifier(identifier, "id", getPackageName()));
-                        if ((i%2)==0) {
-                             if ((k%2)==0) {
-                                 echiquier[i][k].defColor(casesColor1);
-                             } else {
-                                 echiquier[i][k].defColor(casesColor2);
-                            }
-                        } else {
-                            if ((k%2)==0) {
-                                echiquier[i][k].defColor(casesColor2);
-                            } else {
-                                echiquier[i][k].defColor(casesColor1);
-                            }
-                        }
-                    }
-                }
-                new Thread(new Runnable(){
-                    public void run(){
-                        DatabaseReference partyName = database.getReference(partyID);
-                        Boolean white=TRUE;
-                        if(white){
-                            partyName.setValue("white");
-                        }else{
-                            partyName.setValue("black");
-                        }
-                    }
-                });
             }
         });
         bRefresh.setOnClickListener(new View.OnClickListener() {

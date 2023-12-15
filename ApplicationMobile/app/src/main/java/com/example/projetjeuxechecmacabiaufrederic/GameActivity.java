@@ -1,11 +1,15 @@
 package com.example.projetjeuxechecmacabiaufrederic;
 
+import static java.lang.Boolean.TRUE;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DatabaseReference;
 
 public class GameActivity extends AppCompatActivity {
     private static final int[] casesColor1 = {255, 67, 47, 20};
