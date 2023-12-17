@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class GameActivity extends AppCompatActivity {
     private static final int[] casesColor1 = {255, 67, 47, 20};
     private static final int[] casesColor2 = {255, 232, 220, 202};
@@ -69,6 +73,36 @@ public class GameActivity extends AppCompatActivity {
                     }
                 }
             }
+            DataBase partyDB= new DataBase(this);
+            TextView gameDuration = findViewById(R.id.GameDuration);
+            new Thread(new Runnable() {
+                public void run() {
+                    final int[] seconds = {0};
+                    final int[] minutes = {0};
+                    final Runnable task = new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if(seconds[0] ==60){
+                                seconds[0] =0;
+                                minutes[0]++;
+                            }
+                            if(minutes[0] >9 & seconds[0] >9){
+                                gameDuration.setText(minutes[0] +":"+ seconds[0]);
+                            }else if(minutes[0] >9){
+                                gameDuration.setText(minutes[0] +":0"+ seconds[0]);
+                            }else if(seconds[0] >9){
+                                gameDuration.setText("0"+ minutes[0] +":"+ seconds[0]);
+                            }else{
+                                gameDuration.setText("0"+ minutes[0] +":0"+ seconds[0]);
+                            }
+                            seconds[0]++;
+                        }
+                    };
+                    final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+                    executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
+                }
+            }).start();
         }
     }
 }

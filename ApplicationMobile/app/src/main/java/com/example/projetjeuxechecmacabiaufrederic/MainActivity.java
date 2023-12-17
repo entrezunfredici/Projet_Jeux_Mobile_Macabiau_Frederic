@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //creation d'une partie
-                /*Intent game = new Intent(getApplicationContext(), GameActivity.class);
-                startActivity(game);*/
+                Intent game = new Intent(getApplicationContext(), GameActivity.class);
+                startActivity(game);
                 /*GameActivity game = new GameActivity();
                    game.onCreate(savedInstanceState);*/
-                gameActivity();
+                //gameActivity();
             }
         });
         bRefresh.setOnClickListener(new View.OnClickListener() {
@@ -134,42 +134,42 @@ public class MainActivity extends AppCompatActivity {
                         echiquier[i][k].defColor(casesColor1);
                     }
                 }
-                DataBase partyDB= new DataBase(this);
-                TextView gameDuration = findViewById(R.id.GameDuration);
-                new Thread(new Runnable() {
-                    public void run() {
-                        final int[] seconds = {0};
-                        final int[] minutes = {0};
-                        final Runnable task = new Runnable() {
-
-                            @Override
-                            public void run() {
-                                if(seconds[0] ==60){
-                                    seconds[0] =0;
-                                    minutes[0]++;
-                                }
-                                if(minutes[0] >9 & seconds[0] >9){
-                                    gameDuration.setText(minutes[0] +":"+ seconds[0]);
-                                }else if(minutes[0] >9){
-                                    gameDuration.setText(minutes[0] +":0"+ seconds[0]);
-                                }else if(seconds[0] >9){
-                                    gameDuration.setText("0"+ minutes[0] +":"+ seconds[0]);
-                                }else{
-                                    gameDuration.setText("0"+ minutes[0] +":0"+ seconds[0]);
-                                }
-                                seconds[0]++;
-                            }
-                        };
-                        final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-                        executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
-                    }
-                }).start();
-                new Thread(new Runnable() {
-                    public void run() {
-
-                    }
-                }).start();
             }
         }
+        DataBase partyDB= new DataBase(this);
+        TextView gameDuration = findViewById(R.id.GameDuration);
+        new Thread(new Runnable() {
+            public void run() {
+                final int[] seconds = {0};
+                final int[] minutes = {0};
+                final Runnable task = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if(seconds[0] ==60){
+                            seconds[0] =0;
+                            minutes[0]++;
+                        }
+                        if(minutes[0] >9 & seconds[0] >9){
+                            gameDuration.setText(minutes[0] +":"+ seconds[0]);
+                        }else if(minutes[0] >9){
+                            gameDuration.setText(minutes[0] +":0"+ seconds[0]);
+                        }else if(seconds[0] >9){
+                            gameDuration.setText("0"+ minutes[0] +":"+ seconds[0]);
+                        }else{
+                            gameDuration.setText("0"+ minutes[0] +":0"+ seconds[0]);
+                        }
+                        seconds[0]++;
+                    }
+                };
+                final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+                executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
+            }
+        }).start();
+        new Thread(new Runnable() {
+            public void run() {
+
+            }
+        }).start();
     }
 }
