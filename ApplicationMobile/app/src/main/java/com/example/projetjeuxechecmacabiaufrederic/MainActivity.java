@@ -68,12 +68,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //creation d'une partie
-                Intent game = new Intent(getApplicationContext(), GameActivity.class);
-                startActivity(game);
+                /*Intent game = new Intent(getApplicationContext(), GameActivity.class);
+                startActivity(game);*/
                 /*GameActivity game = new GameActivity();
                 game.onCreate(savedInstanceState);*/
-                //gameActivity();
->>>>>>> Test_Intent
+                gameActivity();
             }
         });
 
