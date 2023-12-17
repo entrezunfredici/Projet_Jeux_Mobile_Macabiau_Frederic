@@ -20,44 +20,43 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/arbitrageValue"
+                android:id="@+id/player"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="TextView"
+                android:layout_height="wrap_content"
+                android:text="Wait"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/player"
+                app:layout_constraintEnd_toStartOf="@+id/arbitrageValue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/player"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="wait"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/timeRemainingToPlay"
-                app:layout_constraintStart_toEndOf="@+id/arbitrageValue"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/gameDuration"
+                android:id="@+id/arbitrageValue"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="00:00"
+                android:text="Name"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/timeRemainingToPlay"
+                app:layout_constraintEnd_toStartOf="@+id/timeRemainingToPlay"
+                app:layout_constraintStart_toEndOf="@+id/player"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/timeRemainingToPlay"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="1dp"
                 android:text="00:00"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/gameDuration"
-                app:layout_constraintStart_toEndOf="@+id/player"
+                app:layout_constraintEnd_toStartOf="@+id/GameDuration"
+                app:layout_constraintStart_toEndOf="@+id/arbitrageValue"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/GameDuration"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="00:00"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/timeRemainingToPlay"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

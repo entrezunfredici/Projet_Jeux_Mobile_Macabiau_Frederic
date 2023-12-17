@@ -1,5 +1,7 @@
 package com.example.projetjeuxechecmacabiaufrederic;
 
+import static java.lang.Boolean.TRUE;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -7,6 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
     private static final int[] casesColor1 = {255, 67, 47, 20};
@@ -24,7 +32,7 @@ public class GameActivity extends AppCompatActivity {
         for (int i = 0; i < 8; i++) {
             for (int k = 0; k < 8; k++) {
                 String identifier = "Case" + (i+1);
-                switch ((k+1)) {
+                switch (k+1){
                     case 1:
                         identifier = identifier + "A";
                         break;
@@ -65,6 +73,36 @@ public class GameActivity extends AppCompatActivity {
                     }
                 }
             }
+            DataBase partyDB= new DataBase(this);
+            TextView gameDuration = findViewById(R.id.GameDuration);
+            new Thread(new Runnable() {
+                public void run() {
+                    final int[] seconds = {0};
+                    final int[] minutes = {0};
+                    final Runnable task = new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if(seconds[0] ==60){
+                                seconds[0] =0;
+                                minutes[0]++;
+                            }
+                            if(minutes[0] >9 & seconds[0] >9){
+                                gameDuration.setText(minutes[0] +":"+ seconds[0]);
+                            }else if(minutes[0] >9){
+                                gameDuration.setText(minutes[0] +":0"+ seconds[0]);
+                            }else if(seconds[0] >9){
+                                gameDuration.setText("0"+ minutes[0] +":"+ seconds[0]);
+                            }else{
+                                gameDuration.setText("0"+ minutes[0] +":0"+ seconds[0]);
+                            }
+                            seconds[0]++;
+                        }
+                    };
+                    final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+                    executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
+                }
+            }).start();
         }
     }
 }
