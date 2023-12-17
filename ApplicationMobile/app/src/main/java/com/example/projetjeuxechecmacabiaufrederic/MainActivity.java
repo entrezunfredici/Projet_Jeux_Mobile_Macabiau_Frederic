@@ -160,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
                                 seconds[0]++;
                             }
                         };
-
                         final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
                         executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
                     }
