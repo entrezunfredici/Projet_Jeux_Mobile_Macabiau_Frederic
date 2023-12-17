@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,12 +23,12 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Button bDiscontinued = findViewById(R.id.btnDiscontinuedParty);
-        EditText player = findViewById(R.id.player);
+        TextView player = findViewById(R.id.player);
         Log.v("log","ready top play");
         for (int i = 0; i < 8; i++) {
             for (int k = 0; k < 8; k++) {
                 String identifier = "Case" + (i+1);
-                switch ((k+1)) {
+                switch (k+1){
                     case 1:
                         identifier = identifier + "A";
                         break;
