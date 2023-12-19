@@ -2,6 +2,7 @@ package com.example.projetjeuxechecmacabiaufrederic;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +31,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
+    int iParty = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,16 +42,16 @@ public class MainActivity extends AppCompatActivity {
         ListView partyList = (ListView)findViewById(R.id.partyListLV);
         ArrayList<PartySelecter> psPartyList = new ArrayList();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference Online = database.getReference("partyList");
-        int iParty=0;
-        Online.addValueEventListener(new ValueEventListener() {
+        DatabaseReference online = database.getReference("partyList");
+        
+        online.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                int iParty = dataSnapshot.getValue(int.class);
-                Log.v("Number_of_party",iParty+" ");
-
+                int nParty = dataSnapshot.getValue(int.class);
+                iParty= nParty;
+                Log.v("Number_of_party", "Number of party is"+nParty);
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -57,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.w("APPX", "Failed to read value.", error.toException());
             }
         });
-        for(int i = 1; i<(iParty+1); i++){
+        Log.v("Number_of_party", "Number of party is"+iParty);
+        for(int i = 0; i<iParty; i++){
             PartySelecter ps = new PartySelecter();
-            ps.setTexte("party"+i);
+            ps.setTexte("party"+(i+1));
             psPartyList.add(ps);
         }
         CustomAdapter partyAdapter = new CustomAdapter(this, psPartyList);
@@ -67,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         bNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
+                iParty=iParty+1;
+                online.setValue(iParty);
                 //creation d'une partie
                 /*Intent game = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(game);*/
@@ -171,7 +176,14 @@ public class MainActivity extends AppCompatActivity {
         }).start();
         new Thread(new Runnable() {
             public void run() {
-
+                final Runnable task = new Runnable() {
+                    @Override
+                    public void run() {
+                        
+                    }
+                };
+                final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+                executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
             }
         }).start();
     }
