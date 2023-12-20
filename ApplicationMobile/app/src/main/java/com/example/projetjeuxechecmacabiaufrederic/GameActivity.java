@@ -1,16 +1,11 @@
 package com.example.projetjeuxechecmacabiaufrederic;
 
-import static java.lang.Boolean.TRUE;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -74,14 +69,13 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }
-        DataBase partyDB= new DataBase(this);
+        MyDataBase partyDB= new MyDataBase(this);
         TextView gameDuration = findViewById(R.id.GameDuration);
         new Thread(new Runnable() {
             public void run() {
                 final int[] seconds = {0};
                 final int[] minutes = {0};
                 final Runnable task = new Runnable() {
-
                     @Override
                     public void run() {
                         if(seconds[0] ==60){

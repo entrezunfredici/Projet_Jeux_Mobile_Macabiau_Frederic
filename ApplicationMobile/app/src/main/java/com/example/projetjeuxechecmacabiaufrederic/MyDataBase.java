@@ -7,19 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
-public class DataBase extends SQLiteOpenHelper {
+public class MyDataBase extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "mydatabase";
-
-    private static final String TABLE_NAME = "mytable";
+    private static final String DATABASE_NAME = "textsDatabase";
+    private static final String TABLE_NAME = "textsTable";
     private static final String PKEY = "pkey";
     private static final String COL1 = "col1";
 
-
-    DataBase(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION); }
+    MyDataBase(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -30,12 +27,10 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion != newVersion) { // Upgrade pas très fin
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-            onCreate(db);
-        }
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
     }
+
     public void insertData(String s)
     {
         Log.i("APP"," Insert in database");
