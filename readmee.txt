@@ -1,6 +1,6 @@
 Liste des fonctionnalités implémentées :
 [ ] Utilisation de l'Api Preference
-[x] Ecriture/lecture dans un Fichier
+[ ] Ecriture/lecture dans un Fichier
 [x] Utilisation de SQLite
 [ ] Utilisation de Room
 [x] Utilisation de Firebase
