@@ -1,5 +1,7 @@
 package com.example.projetjeuxechecmacabiaufrederic;
 
+import static java.lang.Boolean.FALSE;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -71,9 +73,12 @@ public class GameActivity extends AppCompatActivity {
         }
         MyDataBase partyDB= new MyDataBase(this);
         TextView gameDuration = findViewById(R.id.GameDuration);
+        TextView timeRemainingToPlay = findViewById(R.id.timeRemainingToPlay);
+        final boolean[] check={FALSE};
+        final int[] checktime={30,0};
         new Thread(new Runnable() {
             public void run() {
-                final int[] seconds = {0};
+                final int[] seconds = {0,0};
                 final int[] minutes = {0};
                 final Runnable task = new Runnable() {
                     @Override
@@ -92,6 +97,23 @@ public class GameActivity extends AppCompatActivity {
                             gameDuration.setText("0"+ minutes[0] +":0"+ seconds[0]);
                         }
                         seconds[0]++;
+                        if(check[0] && (checktime[1]>0 || checktime[0]>0)){
+                            if(checktime[1]==0){
+                                checktime[0]--;
+                                checktime[1]+=60;
+                            }else{
+                                checktime[1]--;
+                            }
+                            if(checktime[0] >9 & checktime[1] >9){
+                                timeRemainingToPlay.setText(checktime[0] +":"+ checktime[1]);
+                            }else if(checktime[0] >9){
+                                timeRemainingToPlay.setText(checktime[0] +":0"+ seconds[0]);
+                            }else if(checktime[1] >9){
+                                timeRemainingToPlay.setText("0"+ checktime[0] +":"+ checktime[1]);
+                            }else{
+                                timeRemainingToPlay.setText("0"+ checktime[0] +":0"+ checktime[1]);
+                            }
+                        }
                     }
                 };
                 final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
