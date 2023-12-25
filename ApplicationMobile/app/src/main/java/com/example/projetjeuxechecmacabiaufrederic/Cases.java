@@ -12,8 +12,6 @@ public class Cases extends View {
     public Cases(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-    private String imageLink="NULL";
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -23,13 +21,6 @@ public class Cases extends View {
         paint.setARGB(color[0],color[1],color[2],color[3]);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(largeur,hauteur,0,0, paint);
-        if(imageLink=="NULL"){
-
-        }
-    }
-
-    public void setImage(String addImageLink){
-        imageLink=addImageLink;
     }
 
     public void defColor(int[] newColor){

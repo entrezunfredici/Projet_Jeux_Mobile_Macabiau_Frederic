@@ -1,23 +1,20 @@
 package com.example.projetjeuxechecmacabiaufrederic;
 
-import android.content.Context;
-import android.util.AttributeSet;
-
-import androidx.annotation.Nullable;
+import android.util.Log;
 
 public class Pieces {
-    String name;
-    String apparence;
-    int orientation;
-    int posX;
-    int posY;
-    String [] directionMove= new String[8];
-    int minimalMove;
-    int maximalMove;
-    String [] directionCapture= new String[8];
-    int minimalCapture;
-    int maximalCapture;
-    int [][] movePositions={
+    static String name;
+    static String apparence;
+    static int orientation;
+    static int posX;
+    static int posY;
+    static String [] directionMove= new String[8];
+    static int minimalMove;
+    static int maximalMove;
+    static String [] directionCapture= new String[8];
+    static int minimalCapture;
+    static int maximalCapture;
+    static int [][] movePositions={
             {0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0},
@@ -27,7 +24,7 @@ public class Pieces {
             {0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0}
     };
-    int [][] capturePositions={
+    static int [][] capturePositions={
             {0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0},
@@ -37,9 +34,7 @@ public class Pieces {
             {0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0}
     };
-
-    protected void PieceCreate(
-            Context context, AttributeSet attrs,
+    public static void CreatePiece(
             String initName, String initApparence,
             String initOrientation, int initPosX, int initPosY,
             String [] initDirectionMove, int initMinimalMove, int initMaximalMove,
@@ -69,7 +64,7 @@ public class Pieces {
         int initDeltaMove=maximalMove-minimalMove;
         int initDeltaCapture=maximalCapture-minimalCapture;
         for(int i=0; i<8; i++){
-            if(initDirectionMove[i]!=""){
+            if(initDirectionMove[i]!=null){
                 directionMove[i]=initDirectionMove[i];
                 int deltaMove=initDeltaMove;
                 switch(directionMove[i]){
@@ -145,7 +140,7 @@ public class Pieces {
             }else{
                 directionMove[i]="NULL";
             }
-            if(initDirectionCapture[i]!=""){
+            if(initDirectionCapture[i]!=null){
                 directionCapture[i]=initDirectionCapture[i];
                 int deltaCapture=initDeltaCapture;
                 switch(directionCapture[i]){
@@ -222,19 +217,18 @@ public class Pieces {
                 directionCapture[i]="NULL";
             }
         }
-
-
     }
-    public int GetPosX(){
+    public static int GetPosX(){
         return posX;
     }
-    public int GetPosY(){
+    public static int GetPosY(){
         return posY;
     }
-    public int [][] GetMovePositions(){return movePositions;}
-    public int [][] GetCapturePositions(){return capturePositions;}
+    public static String GetApparence(){return apparence;}
+    public static int [][] GetMovePositions(){return movePositions;}
+    public static int [][] GetCapturePositions(){return capturePositions;}
 
-    public int SetMovement(int newPosX, int newPosY){
+    public static int SetMovement(int newPosX, int newPosY){
         int [][] setMovePositions={{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}};
         setMovePositions[newPosX][newPosY]=1;
         for(int i=0; i<8; i++){
@@ -324,7 +318,7 @@ public class Pieces {
         }
         return 0;
     }
-    public int SetCapture(int newPosX, int newPosY){
+    public static int SetCapture(int newPosX, int newPosY){
         int [][] setCapturePosition={{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}};
         setCapturePosition[newPosX][newPosY]=1;
         for(int i=0; i<8; i++){

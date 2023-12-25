@@ -2,16 +2,30 @@ package com.example.projetjeuxechecmacabiaufrederic;
 
 import static java.lang.Boolean.FALSE;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import com.squareup.picasso.Picasso;
 
 public class GameActivity extends AppCompatActivity {
     private static final int[] casesColor1 = {255, 67, 47, 20};
@@ -122,14 +136,61 @@ public class GameActivity extends AppCompatActivity {
         }).start();
         new Thread(new Runnable() {
             public void run() {
-                final Runnable task = new Runnable() {
+                Pieces[] myPieces={};
+                ImageView[] displayedPieces={};
+                Pieces pion = null;
+                String name="pion";
+                String[] movements={"TOP", null, null, null, null, null, null, null, null};
+                String[] captures={"RIGHT TOP","LEFT TOP", null, null, null, null, null, null, null};
+                pion.CreatePiece(
+                        "pion",
+                        "https://github.com/entrezunfredici/Projet_Jeux_Mobile_Macabiau_Frederic/tree/main/pieces/",
+                        "south",
+                        1, 1,
+                        movements,
+                        1,
+                        1,
+                        captures,
+                        1,
+                        1
+                );
+                int pionPosX=pion.GetPosX();
+                int pionPosY=pion.GetPosY();
+                String link=pion.GetApparence();
+                ImageView Test=findViewById(R.id.imagePion1);
+                Test.layout(20,20,20,20);
+                displayPieceInCase(link, Test);
+            }
+        }).start();
+    }
+    protected Context getContext(){
+        return getApplicationContext();
+    }
+    protected void displayPieceInCase(String url, ImageView imagePiece){
+        new Thread(new Runnable(){
+            public void run(){
+                RequestQueue queue = Volley.newRequestQueue(getContext());
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    ImageView imagePiece = null;
+                                    JSONObject jObj = new JSONObject(response);
+                                    JSONObject jObjCurrent = jObj.getJSONObject("current_condition");
+                                    String icon = jObjCurrent.getString("icon");
+                                    Picasso.get().load(icon).into(imagePiece);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
                     @Override
-                    public void run() {
+                    public void onErrorResponse(VolleyError error) {
 
                     }
-                };
-                final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-                executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);
+                });
+                queue.add(stringRequest);
             }
         }).start();
     }

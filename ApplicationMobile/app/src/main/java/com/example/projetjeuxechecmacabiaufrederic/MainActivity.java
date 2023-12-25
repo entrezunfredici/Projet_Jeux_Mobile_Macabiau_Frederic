@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -26,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MyDataBase menuDataBase= new MyDataBase(this);
-        Context context=getApplicationContext();
         Button bNew=findViewById(R.id.btnCreateNewParty);
         Button bRefresh=findViewById(R.id.btnRefreshPartyList);
         ListView partyList = (ListView)findViewById(R.id.partyListLV);
         ArrayList<PartySelecter> psPartyList = new ArrayList();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference online = database.getReference("partyList");
-        online.addValueEventListener(new ValueEventListener() {
+
+       online.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.w("APPX", "Failed to read value.", error.toException());
             }
         });
-        for(int i = 0; i<parseInt(menuDataBase.readData()); i++){
+         for(int i = 0; i<parseInt(menuDataBase.readData()); i++){
             PartySelecter ps = new PartySelecter();
             ps.setTexte("party"+(i+1));
             psPartyList.add(ps);
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view){
                 int iParty=parseInt(menuDataBase.readData())+1;
                 online.setValue(iParty);
+                DatabaseReference host = database.getReference("freeHost"+iParty);
                 //creation d'une partie
                 Intent game = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(game);
