@@ -408,4 +408,5 @@ public class Pieces {
         }
         return 0;
     }
+    public static void setMaximalMove(int newMaximalMove){maximalMove=newMaximalMove;}
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,13 +16,22 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class CustomAdapter extends ArrayAdapter<PartySelecter> {
-    public CustomAdapter(Context context, ArrayList<PartySelecter> users) {
-        super(context, 0, users);
+
+    private MainActivity.MainActivityCallBack mainActivityCallBack;
+    Context selecterContext;
+    public CustomAdapter(Context context, ArrayList<PartySelecter> games, MainActivity.MainActivityCallBack mainActivityCallBack) {
+        super(context, 0, games);
+        this.mainActivityCallBack=mainActivityCallBack;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View listItemView = convertView;
+        if (listItemView == null) {
+            listItemView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.game_field, parent, false);
+        }
         PartySelecter ps = getItem(position);
 
         if (convertView == null) {
@@ -29,14 +39,13 @@ public class CustomAdapter extends ArrayAdapter<PartySelecter> {
         }
         TextView partyName = convertView.findViewById(R.id.partyName);
         Button btnJoinParty= convertView.findViewById(R.id.btnJoinParty);
-
-        partyName.setText(ps.getTexte());
+        btnJoinParty.setText(ps.getDefaultButton());
+        partyName.setText(ps.getText());
         btnJoinParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 //connection à une partie
-                //setContentView(R.layout.activity_game);
-                //Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                mainActivityCallBack.onButtonClicked(ps.getiParty());
             }
         });
         return convertView;

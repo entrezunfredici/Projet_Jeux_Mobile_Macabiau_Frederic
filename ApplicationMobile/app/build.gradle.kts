@@ -33,6 +33,11 @@ android {
 }
 
 dependencies {
+    val room_version = "2.5.0"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("androidx.appcompat:appcompat:1.6.1")
