@@ -45,7 +45,7 @@ public class CustomAdapter extends ArrayAdapter<PartySelecter> {
             @Override
             public void onClick(View view){
                 //connection à une partie
-                mainActivityCallBack.onButtonClicked(ps.getiParty());
+                mainActivityCallBack.onButtonClicked(ps.getHost());
             }
         });
         return convertView;

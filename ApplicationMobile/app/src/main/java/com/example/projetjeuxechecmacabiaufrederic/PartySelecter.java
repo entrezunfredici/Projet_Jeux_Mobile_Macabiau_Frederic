@@ -4,7 +4,7 @@ import android.widget.Button;
 
 public class PartySelecter {
     private String mDefaultButton;
-    private int iParty;
+    private int iHost;
     private int mLink;
     private String text;
 
@@ -30,9 +30,9 @@ public class PartySelecter {
         return mLink;
     }
 
-    public int getiParty(){
-        return iParty;
+    public int getHost(){
+        return iHost;
     }
 
-    public void setIParty(int init){iParty=init;}
+    public void setHost(int init){iHost=init;}
 }

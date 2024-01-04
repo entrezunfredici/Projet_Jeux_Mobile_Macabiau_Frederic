@@ -35,6 +35,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class GameActivity extends AppCompatActivity {
+    public interface GameActivityCallBack{
+        void timerCall();
+    }
     private static final int[] casesColor1 = {255, 67, 47, 20};
     private static final int[] casesColor2 = {255, 232, 220, 202};
     private static final int[] casesColorGreen = {255, 9, 106, 9};
@@ -105,6 +108,14 @@ public class GameActivity extends AppCompatActivity {
         MyDataBase partyDB= new MyDataBase(this);
         TextView gameDuration = findViewById(R.id.GameDuration);
         TextView timeRemainingToPlay = findViewById(R.id.timeRemainingToPlay);
+        startParty[0] = TRUE;
+        /*clockSystem clock = null;
+        clock.initClock(new GameActivityCallBack() {
+            @Override
+            public void timerCall() {
+                Log.d("mes couilles en ski","test");
+            }
+        });*/
         new Thread(new Runnable() {
             public void run() {
                 final Runnable timers = new Runnable() {
@@ -146,8 +157,8 @@ public class GameActivity extends AppCompatActivity {
                         }
                     }
                 };
-                final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-                executor.scheduleAtFixedRate(timers, 0, 1, TimeUnit.SECONDS);
+                final ScheduledExecutorService timerExecutor = Executors.newSingleThreadScheduledExecutor();
+                timerExecutor.scheduleAtFixedRate(timers, 0, 1, TimeUnit.SECONDS);
             }
         }).start();
         new Thread(new Runnable() {
@@ -160,7 +171,7 @@ public class GameActivity extends AppCompatActivity {
                 String[] captures={"RIGHT TOP","LEFT TOP", null, null, null, null, null, null, null};
                 pion.CreatePiece(
                         "pion",
-                        "https://github.com/entrezunfredici/Projet_Jeux_Mobile_Macabiau_Frederic/tree/main/pieces/",
+                        "imagePion1",
                         "south",
                         1, 1,
                         movements,
@@ -172,11 +183,25 @@ public class GameActivity extends AppCompatActivity {
                 );
                 int pionPosX=pion.GetPosX();
                 int pionPosY=pion.GetPosY();
-                String link=pion.GetApparence();
+
+                //String link=pion.GetApparence();
                 ImageView Test=findViewById(R.id.imagePion1);
-                Test.layout(20,20,20,20);
-                RequestQueue queue = Volley.newRequestQueue(getContext());
-                downloadImage(link, Test, queue, "pion","icon");
+                /*Test.layout(
+                        echiquier[pionPosX][pionPosY].getBottom(),
+                        echiquier[pionPosX][pionPosY].getLeft(),
+                        echiquier[pionPosX][pionPosY].getHeight(),
+                        echiquier[pionPosX][pionPosY].getWidth()
+                );*/
+                //Test.
+                //FrameLayout.LayoutParams testParams=(FrameLayout.LayoutParams)Test.getLayoutParams();
+                /*testParams.width=echiquier[pionPosX][pionPosY].getWidth();
+                testParams.height=echiquier[pionPosX][pionPosY].getHeight();
+                testParams.leftMargin=echiquier[pionPosX][pionPosY].getLeft();
+                testParams.bottomMargin=echiquier[pionPosX][pionPosY].getBottom();*/
+                //Test.setLayoutParams(testParams);
+                Log.d("Modificateur","modification des images");
+                //RequestQueue queue = Volley.newRequestQueue(getContext());
+                //downloadImage(link, Test, queue, "pion","icon");
             }
         }).start();
     }
@@ -211,58 +236,35 @@ public class GameActivity extends AppCompatActivity {
         }).start();
     }
     static public void setHost(String hostName, Context context){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String piecesColor=null;
+        FireBaseController fireBaseController = null;
+        fireBaseController.initControler(context);
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String[] piecesColor={null,null};
         if(Math.random()<0.5){
-            piecesColor="white";
+            piecesColor[0]="white";
+            piecesColor[1]="black";
         }else{
-            piecesColor="black";
+            piecesColor[0]="black";
+            piecesColor[1]="white";
         }
-        String finalPiecesColor = piecesColor;
+        String[] finalPiecesColor = piecesColor;
         MyDataBase partyDatabase= new MyDataBase(context);
+
         new Thread(new Runnable() {
             public void run() {
-                DatabaseReference host = database.getReference(hostName);
-                final int[] nPlayers = {1};
-                final String[] hostStatus={"Waiting_Players"};
-                DatabaseReference host_piece_color = database.getReference(hostName+"HostPieceColor");
-                host_piece_color.setValue(finalPiecesColor);
-                DatabaseReference Player_piece_color = database.getReference(hostName+"PlayerPieceColor");
-                if(finalPiecesColor=="white"){
-                    Player_piece_color.setValue("black");
-                }else{
-                    Player_piece_color.setValue("white");
-                }
-                DatabaseReference host_status = database.getReference(hostName+"status");
-                host_status.setValue(hostStatus[0]);
-                host_status.setValue(hostStatus[0]);
-                DatabaseReference players_status = database.getReference(hostName+"players");
-                players_status.setValue(nPlayers[0]);
+                //DatabaseReference host = database.getReference(hostName);
+                fireBaseController.addHost(hostName, finalPiecesColor[0], finalPiecesColor[1]);
                 final Runnable readDatabase = new Runnable() {
                     @Override
                     public void run() {
-                        if(nPlayers[0]<=1){
-                            players_status.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    // This method is called once with the initial value and again
-                                    // whenever data at this location is updated.
-                                    int nbPlayers = dataSnapshot.getValue(int.class);
-                                    partyDatabase.insertData(nbPlayers+"");
-                                }
-                                @Override
-                                public void onCancelled(DatabaseError error) {
-                                    // Failed to read value
-                                    Log.w("APPX", "Failed to read value.", error.toException());
-                                }
-                            });
-                            nPlayers[0] =parseInt(partyDatabase.readData());//partyDatabase.readData());
-                        }else{
-                            if(hostStatus[0]=="Waiting_Players"){
-                                hostStatus[0]="Ready_To_Play";
-                                host_status.setValue("Ready_To_Play");
-                                startParty[0]=TRUE;
+                        int nPlayers = fireBaseController.getPlayerSatus();
+                        if (fireBaseController.getPlayerSatus() <= 1) {
+
+                        } else {
+                            if (fireBaseController.getHostSatus() == "Waiting_Players") {
+                                startParty[0] = TRUE;
                             }
+
                         }
                     }
                 };
@@ -273,11 +275,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     static public void connectToAnHost(String hostName, Context context){
+        FireBaseController fireBaseController = null;
+        fireBaseController.initControler(context);
         new Thread(new Runnable() {
             public void run() {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference players_status = database.getReference(hostName+"players");
-                players_status.setValue(2);
+                fireBaseController.connectToAnHost(hostName);
                 if(startCheck[0]){
 
                 }else{

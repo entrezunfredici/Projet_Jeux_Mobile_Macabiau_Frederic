@@ -32,6 +32,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     public interface MainActivityCallBack{
@@ -41,31 +44,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MyDataBase menuDataBase= new MyDataBase(this);
         Button bNew=findViewById(R.id.btnCreateNewParty);
         Button bRefresh=findViewById(R.id.btnRefreshPartyList);
         ArrayList<PartySelecter> psPartyList = new ArrayList();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference online = database.getReference("partyList");
-        online.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                int nParty = dataSnapshot.getValue(int.class);
-                menuDataBase.insertData(nParty+"");
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("APPX", "Failed to read value.", error.toException());
-            }
-        });
-        for(int i = 0; i<parseInt(menuDataBase.readData()); i++){
-             //DatabaseReference partyStatus = database.getReference("host"+i+"status");
-             PartySelecter ps = new PartySelecter("Rejoindre",R.layout.activity_main,"party"+(i+1));
-             ps.setIParty(i+1);
-             psPartyList.add(ps);
+        FireBaseController firebaseDatabase = null;
+        firebaseDatabase.initControler(this);
+        firebaseDatabase.getPartyList();
+        for(int i = 0; i<firebaseDatabase.getPartyList(); i++){
+            PartySelecter ps = new PartySelecter("Rejoindre",R.layout.activity_main,"party"+(i+1));
+            //ps.setHost(firebaseDatabase.getFreeHost(i));
+            ps.setHost(i+1);
+            psPartyList.add(ps);
         }
         CustomAdapter partyAdapter = new CustomAdapter(this, psPartyList, new MainActivityCallBack() {
             @Override
@@ -81,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
         bNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                int iParty=parseInt(menuDataBase.readData())+1;
-                online.setValue(iParty);
+                firebaseDatabase.addNewParty();
                 //creation d'une partie
                 Intent game = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(game);
-                setHost("host"+iParty, getApplicationContext());
+                int n=firebaseDatabase.getPartyList()+1;
+                setHost("host"+n, getApplicationContext());
             }
         });
 
@@ -94,22 +83,9 @@ public class MainActivity extends AppCompatActivity {
             int iParty = 0;
             @Override
             public void onClick(View v) {
-                online.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        int nParty = dataSnapshot.getValue(int.class);
-                        menuDataBase.insertData(nParty+"");
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w("APPX", "Failed to read value.", error.toException());
-                    }
-                });
-                for(int i = 0; i<parseInt(menuDataBase.readData()); i++){
-                    PartySelecter ps = new PartySelecter("Rejoindre",R.layout.activity_game,"party"+(i+1));
+                for(int i = 0; i<firebaseDatabase.getPartyList(); i++){
+                    PartySelecter ps = new PartySelecter("Rejoindre",R.layout.activity_main,"party"+(i+1));
+                    ps.setHost(firebaseDatabase.getFreeHost(i));
                     psPartyList.add(ps);
                 }
             }
