@@ -5,9 +5,12 @@ import static java.lang.Boolean.TRUE;
 import static java.lang.Integer.parseInt;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -108,12 +111,12 @@ public class GameActivity extends AppCompatActivity {
         MyDataBase partyDB= new MyDataBase(this);
         TextView gameDuration = findViewById(R.id.GameDuration);
         TextView timeRemainingToPlay = findViewById(R.id.timeRemainingToPlay);
-        startParty[0] = TRUE;
+        //startParty[0] = TRUE;
         /*clockSystem clock = null;
         clock.initClock(new GameActivityCallBack() {
             @Override
             public void timerCall() {
-                Log.d("mes couilles en ski","test");
+                Log.d("azertyuiop","test");
             }
         });*/
         new Thread(new Runnable() {
@@ -171,7 +174,7 @@ public class GameActivity extends AppCompatActivity {
                 String[] captures={"RIGHT TOP","LEFT TOP", null, null, null, null, null, null, null};
                 pion.CreatePiece(
                         "pion",
-                        "imagePion1",
+                        R.drawable.black_pion,
                         "south",
                         1, 1,
                         movements,
@@ -183,25 +186,7 @@ public class GameActivity extends AppCompatActivity {
                 );
                 int pionPosX=pion.GetPosX();
                 int pionPosY=pion.GetPosY();
-
-                //String link=pion.GetApparence();
-                ImageView Test=findViewById(R.id.imagePion1);
-                /*Test.layout(
-                        echiquier[pionPosX][pionPosY].getBottom(),
-                        echiquier[pionPosX][pionPosY].getLeft(),
-                        echiquier[pionPosX][pionPosY].getHeight(),
-                        echiquier[pionPosX][pionPosY].getWidth()
-                );*/
-                //Test.
-                //FrameLayout.LayoutParams testParams=(FrameLayout.LayoutParams)Test.getLayoutParams();
-                /*testParams.width=echiquier[pionPosX][pionPosY].getWidth();
-                testParams.height=echiquier[pionPosX][pionPosY].getHeight();
-                testParams.leftMargin=echiquier[pionPosX][pionPosY].getLeft();
-                testParams.bottomMargin=echiquier[pionPosX][pionPosY].getBottom();*/
-                //Test.setLayoutParams(testParams);
-                Log.d("Modificateur","modification des images");
-                //RequestQueue queue = Volley.newRequestQueue(getContext());
-                //downloadImage(link, Test, queue, "pion","icon");
+                echiquier[pionPosX][pionPosY].setApparence(pion.GetApparence());
             }
         }).start();
     }

@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class Pieces {
     static String name;
-    static String apparence;
+    static int apparence;
     static int orientation;
     static int posX;
     static int posY;
@@ -35,7 +35,7 @@ public class Pieces {
             {0,0,0,0,0,0,0,0}
     };
     public static void CreatePiece(
-            String initName, String initApparence,
+            String initName, int initApparence,
             String initOrientation, int initPosX, int initPosY,
             String [] initDirectionMove, int initMinimalMove, int initMaximalMove,
             String [] initDirectionCapture, int initMinimalCapture, int initMaximalCapture
@@ -224,7 +224,7 @@ public class Pieces {
     public static int GetPosY(){
         return posY;
     }
-    public static String GetApparence(){return apparence;}
+    public static int GetApparence(){return apparence;}
     public static int [][] GetMovePositions(){return movePositions;}
     public static int [][] GetCapturePositions(){return capturePositions;}
 
