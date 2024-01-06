@@ -30,7 +30,6 @@ public class Cases extends View {
             canvas.drawBitmap(monImage, 0, 0, null);
             invalidate(); //Efface pour redessiner.
         }
-
     }
 
     public void defColor(int[] newColor){

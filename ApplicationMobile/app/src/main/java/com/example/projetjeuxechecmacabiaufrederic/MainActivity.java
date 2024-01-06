@@ -47,12 +47,10 @@ public class MainActivity extends AppCompatActivity {
         Button bNew=findViewById(R.id.btnCreateNewParty);
         Button bRefresh=findViewById(R.id.btnRefreshPartyList);
         ArrayList<PartySelecter> psPartyList = new ArrayList();
-        FireBaseController firebaseDatabase = null;
-        firebaseDatabase.initControler(this);
+        FireBaseController firebaseDatabase = new FireBaseController(this);
         firebaseDatabase.getPartyList();
         for(int i = 0; i<firebaseDatabase.getPartyList(); i++){
             PartySelecter ps = new PartySelecter("Rejoindre",R.layout.activity_main,"party"+(i+1));
-            //ps.setHost(firebaseDatabase.getFreeHost(i));
             ps.setHost(i+1);
             psPartyList.add(ps);
         }
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         });
         ListView partyList = (ListView)findViewById(R.id.partyListLV);
         partyList.setAdapter(partyAdapter);
-
         bNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -78,16 +75,19 @@ public class MainActivity extends AppCompatActivity {
                 setHost("host"+n, getApplicationContext());
             }
         });
-
+        Context context=this;
         bRefresh.setOnClickListener(new View.OnClickListener() {
             int iParty = 0;
             @Override
             public void onClick(View v) {
+                psPartyList.clear();
                 for(int i = 0; i<firebaseDatabase.getPartyList(); i++){
                     PartySelecter ps = new PartySelecter("Rejoindre",R.layout.activity_main,"party"+(i+1));
-                    ps.setHost(firebaseDatabase.getFreeHost(i));
+                    ps.setHost(i+1);
                     psPartyList.add(ps);
                 }
+                ListView partyList = (ListView)findViewById(R.id.partyListLV);
+                partyList.setAdapter(partyAdapter);
             }
         });
     }

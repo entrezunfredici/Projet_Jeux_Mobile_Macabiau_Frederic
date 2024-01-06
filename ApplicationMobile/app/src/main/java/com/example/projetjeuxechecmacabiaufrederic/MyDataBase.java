@@ -26,7 +26,7 @@ public class MyDataBase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" +
                 PKEY + " INTEGER PRIMARY KEY," +
-                COL1 + " TEXT,"+
+                COL1 + " INTEGER,"+
                 COL2 + " TEXT,"+
                 COL3 + " TEXT)";
         db.execSQL(TABLE_CREATE);
@@ -61,6 +61,18 @@ public class MyDataBase extends SQLiteOpenHelper {
         db.endTransaction();
     }
 
+    public void insertCol1(int n)
+    {
+        Log.i("APP"," Insert in database");
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        ContentValues values = new ContentValues();
+        values.put(COL1, n);
+        db.insertOrThrow(TABLE_NAME, null, values);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+    }
+
     public String readData(String colName)
     {
         Log.i("APP", "Reading database...");
@@ -69,14 +81,33 @@ public class MyDataBase extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(select, null);
         Log.i("APP", "Number of entries: " + cursor.getCount());
         String result = "";
-        if (cursor.getCount() > 0) {
+        /*if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
                 int i = cursor.getColumnIndex(colName);
                 Log.i("APP", "Reading: " + cursor.getString(i));
                 result = cursor.getString(i);
             } while (cursor.moveToNext());
-        }
+        }*/
+        cursor.moveToLast();
+        int i = cursor.getColumnIndex(colName);
+        Log.i("APP", "Reading: " + cursor.getString(i));
+        result = cursor.getString(i);
+        return result;
+    }
+
+    public int readCol1()
+    {
+        Log.i("APP", "Reading database...");
+        String select = new String("SELECT * from " + TABLE_NAME);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(select, null);
+        Log.i("APP", "Number of entries: " + cursor.getCount());
+        int result = 0;
+        cursor.moveToLast();
+        int i = cursor.getColumnIndex(COL1);
+        Log.i("APP", "Reading: " + cursor.getInt(i)+"");
+        result = cursor.getInt(i);
         return result;
     }
 }

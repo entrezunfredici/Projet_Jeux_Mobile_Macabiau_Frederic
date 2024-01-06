@@ -111,59 +111,46 @@ public class GameActivity extends AppCompatActivity {
         MyDataBase partyDB= new MyDataBase(this);
         TextView gameDuration = findViewById(R.id.GameDuration);
         TextView timeRemainingToPlay = findViewById(R.id.timeRemainingToPlay);
-        //startParty[0] = TRUE;
-        /*clockSystem clock = null;
-        clock.initClock(new GameActivityCallBack() {
+        clockSystem clock = new clockSystem(new GameActivityCallBack() {
             @Override
             public void timerCall() {
-                Log.d("azertyuiop","test");
-            }
-        });*/
-        new Thread(new Runnable() {
-            public void run() {
-                final Runnable timers = new Runnable() {
-                    @Override
-                    public void run() {
-                        if(startParty[0]){
-                            if(timer[0]==60){
-                                timer[0]=0;
-                                timer[1]++;
-                            }
-                            if(timer[1]==60) {
-                                timer[1]=0;
-                                timer[2]++;
-                            }
-                            for(int i=0; i<3; i++){
-                                if(timer[i]<10){
-                                    timerPrinter[i]="0"+timer[i];
-                                }else{
-                                    timerPrinter[i]=""+timer[i];
-                                }
-                            }
-                            gameDuration.setText(timerPrinter[2]+":"+timerPrinter[1] +":"+ timerPrinter[0]);
-                            timer[0]++;
-                        }
-                        if(startCheck[0] && (checkTime[0]>=0 || checkTime[1]>=0)){
-                            if(checkTime[0]==-1){
-                                checkTime[1]--;
-                                checkTime[0]+=60;
-                            }
-                            for(int i=0; i<3; i++){
-                                if(timer[i]<10){
-                                    timerPrinter[i]="0"+checkTime[i];
-                                }else{
-                                    timerPrinter[i]=""+checkTime[i];
-                                }
-                            }
-                            timeRemainingToPlay.setText(timerPrinter[1] +":"+ timerPrinter[0]);
-                            checkTime[0]--;
+                if(startParty[0]){
+                    if(timer[0]==60){
+                        timer[0]=0;
+                        timer[1]++;
+                    }
+                    if(timer[1]==60) {
+                        timer[1]=0;
+                        timer[2]++;
+                    }
+                    for(int i=0; i<3; i++){
+                        if(timer[i]<10){
+                            timerPrinter[i]="0"+timer[i];
+                        }else{
+                            timerPrinter[i]=""+timer[i];
                         }
                     }
-                };
-                final ScheduledExecutorService timerExecutor = Executors.newSingleThreadScheduledExecutor();
-                timerExecutor.scheduleAtFixedRate(timers, 0, 1, TimeUnit.SECONDS);
+                    gameDuration.setText(timerPrinter[2]+":"+timerPrinter[1] +":"+ timerPrinter[0]);
+                    timer[0]++;
+                }
+                if(startCheck[0] && (checkTime[0]>=0 || checkTime[1]>=0)){
+                    if(checkTime[0]==-1){
+                        checkTime[1]--;
+                        checkTime[0]+=60;
+                    }
+                    for(int i=0; i<3; i++){
+                        if(timer[i]<10){
+                            timerPrinter[i]="0"+checkTime[i];
+                        }else{
+                            timerPrinter[i]=""+checkTime[i];
+                        }
+                    }
+                    timeRemainingToPlay.setText(timerPrinter[1] +":"+ timerPrinter[0]);
+                    checkTime[0]--;
+                }
             }
-        }).start();
+        });
+        clock.initClock();
         new Thread(new Runnable() {
             public void run() {
                 Pieces[] myPieces={};
@@ -221,8 +208,7 @@ public class GameActivity extends AppCompatActivity {
         }).start();
     }
     static public void setHost(String hostName, Context context){
-        FireBaseController fireBaseController = null;
-        fireBaseController.initControler(context);
+        FireBaseController fireBaseController = new FireBaseController(context);
         //FirebaseDatabase database = FirebaseDatabase.getInstance();
         String[] piecesColor={null,null};
         if(Math.random()<0.5){
@@ -260,8 +246,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     static public void connectToAnHost(String hostName, Context context){
-        FireBaseController fireBaseController = null;
-        fireBaseController.initControler(context);
+        FireBaseController fireBaseController = new FireBaseController(context);
         new Thread(new Runnable() {
             public void run() {
                 fireBaseController.connectToAnHost(hostName);

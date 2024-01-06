@@ -26,13 +26,16 @@ public class FireBaseController {
     static DatabaseReference host_status;
     static DatabaseReference players_status;
     static Context context;
-    public static void initControler(Context initContext){
+    public FireBaseController(Context initContext){
+        super();
         context=initContext;
         database = FirebaseDatabase.getInstance();
         partyListReference = database.getReference("partyList");
         hostDataBase = new MyDataBase(context);
     }
-
+    public interface FireBaseCallBack{
+        void timerCall();
+    }
     public static void addNewParty(){
         partyListReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -40,7 +43,7 @@ public class FireBaseController {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 int nParty = dataSnapshot.getValue(int.class);
-                hostDataBase.insertData(MyDataBase.COL1,nParty+"");
+                hostDataBase.insertCol1(nParty);
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -48,7 +51,7 @@ public class FireBaseController {
                 Log.w("APPX", "Failed to read value.", error.toException());
             }
         });
-        int partyNumber=parseInt(hostDataBase.readData(MyDataBase.COL1));
+        int partyNumber=hostDataBase.readCol1();
         partyNumber++;
         partyListReference.setValue(partyNumber);
     }
@@ -62,45 +65,45 @@ public class FireBaseController {
         Player_piece_color.setValue(PlayerPieceColor);
         host_status = database.getReference(hostName+"status");
         host_status.setValue("Waiting_Players");
+        hostDataBase.insertData(MyDataBase.COL2,"Waiting_Players");
         players_status = database.getReference(hostName+"players");
-        players_status.setValue(1);
+        players_status.setValue("1");
         hostDataBase.insertData(MyDataBase.COL3,"1");
-        Log.d("Serveure","server clock");
-        Thread DatabaseThread;
-        new Thread(new Runnable() {
-            public void run() {
-                final Runnable readDatabase = new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("Serveure",hostDataBase.readData(MyDataBase.COL2));
-                        if((parseInt(hostDataBase.readData(MyDataBase.COL3)))<=1){
-                            players_status.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    // This method is called once with the initial value and again
-                                    // whenever data at this location is updated.
-                                    int nbPlayers = dataSnapshot.getValue(int.class);
-                                    hostDataBase.insertData(MyDataBase.COL3,nbPlayers+"");
-                                }
-                                @Override
-                                public void onCancelled(DatabaseError error) {
-                                    // Failed to read value
-                                    Log.w("APPX", "Failed to read value.", error.toException());
-                                }
-                            });
-                        }else{
-                            if(hostDataBase.readData(MyDataBase.COL2)=="Waiting_Players"){
-                                hostDataBase.insertData(MyDataBase.COL3,"Ready_To_Play");
-                                host_status.setValue("Ready_To_Play");
-                            }
+        final String[] value = {hostDataBase.readData(MyDataBase.COL3)};
+        clockSystem clock = new clockSystem(new FireBaseCallBack() {
+            @Override
+            public void timerCall() {
+                if(value[0]==null){
+                    value[0]="1";
+                }
+                Log.d("nbJoueurs",value[0]);
+                if(value[0]=="1"){
+                    Log.d("nbJoueurs","si un joueur");
+                    players_status.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                            String nbPlayers = dataSnapshot.getValue(String.class);
+                            hostDataBase.insertData(MyDataBase.COL3,nbPlayers);
                         }
-                        Log.d("Serveure",hostDataBase.readData(MyDataBase.COL2));
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                            Log.w("APPX", "Failed to read value.", error.toException());
+                        }
+                    });
+                    if(hostDataBase.readData(MyDataBase.COL3)!=null){
+                        value[0] = hostDataBase.readData(MyDataBase.COL3);
                     }
-                };
-                final ScheduledExecutorService firebaseExecutor = Executors.newSingleThreadScheduledExecutor();
-                firebaseExecutor.scheduleAtFixedRate(readDatabase, 0, 1, TimeUnit.SECONDS);
+                }else{
+                    Log.d("nbJoueurs","si deux joueurs");
+                    hostDataBase.insertData(MyDataBase.COL2,"Ready_To_Play");
+                    host_status.setValue("Ready_To_Play");
+                }
             }
-        }).start();
+        });
+        clock.initClock();
     }
 
     public static void connectToAnHost(String hostName){
@@ -115,7 +118,7 @@ public class FireBaseController {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 int nParty = dataSnapshot.getValue(int.class);
-                hostDataBase.insertData(MyDataBase.COL1,nParty+"");
+                hostDataBase.insertCol1(nParty);
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -123,30 +126,8 @@ public class FireBaseController {
                 Log.w("APPX", "Failed to read value.", error.toException());
             }
         });
-        Log.d("Mes_couilles_en_ski",hostDataBase.readData(MyDataBase.COL1));
-        int returned = parseInt(hostDataBase.readData(MyDataBase.COL1));
-        return returned;
-    }
-    public static int getFreeHost(int iParty){
-        int iHost;
-        for(iHost=1; hostDataBase.readData(MyDataBase.COL2)!="Waiting_Players"; iHost++) {
-            partyHostStatusReference = database.getReference("host"+iHost+"status");
-            partyHostStatusReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-                    String text = dataSnapshot.getValue(String.class);
-                    hostDataBase.insertData(MyDataBase.COL2,text);
-                }
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w("APPX", "Failed to read value.", error.toException());
-                }
-            });
-        }
-        return iHost;
+        Log.d("nbParties","n="+hostDataBase.readCol1());
+        return hostDataBase.readCol1();
     }
     public static int getPlayerSatus(){
         return parseInt(hostDataBase.readData(MyDataBase.COL3));
