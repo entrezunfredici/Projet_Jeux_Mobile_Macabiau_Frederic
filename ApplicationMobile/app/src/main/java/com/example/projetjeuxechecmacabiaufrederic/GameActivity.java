@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -36,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import android.view.MotionEvent;
 
 public class GameActivity extends AppCompatActivity {
     public interface GameActivityCallBack{
@@ -45,7 +48,10 @@ public class GameActivity extends AppCompatActivity {
     private static final int[] casesColor2 = {255, 232, 220, 202};
     private static final int[] casesColorGreen = {255, 9, 106, 9};
     private static final int[] casesColorRed = {255, 240, 0, 32};
-    private Cases[][] echiquier = new Cases[8][8];
+    private static final int[] casesColorPieceSelected = {255, 183, 181, 181};
+
+    private final Cases[][] echiquier = new Cases[8][8];
+    private FrameLayout[][] touchCases = new FrameLayout[8][8];
 
     private static final boolean [] startParty = {FALSE};
 
@@ -55,6 +61,43 @@ public class GameActivity extends AppCompatActivity {
     private static final boolean [] startCheck = {FALSE};
 
     private static final int[] checkTime = {0,20,0};
+
+    int piecesNumber=16;
+    int[][] piecesPlacement={
+            {1,2,3,4,5,3,2,1},
+            {6,6,6,6,6,6,6,6}
+    };
+    String[] piecesNames={
+            "tour","cavalier","fou","reine","roi","pion",
+    };
+    int[] piecesApparences={
+            0,
+            0,
+            0,
+            0,
+            0,
+            R.drawable.black_pion
+    };
+    String[][] piecesMovements={
+            {"TOP","BOTTOM","RIGHT","LEFT", null, null, null, null},
+            {null, null, null, null,"RIGHT TOP","LEFT TOP","RIGHT BOTTOM","LEFT BOTTOM"},
+            {null, null, null, null,"RIGHT TOP","LEFT TOP","RIGHT BOTTOM","LEFT BOTTOM"},
+            {"TOP","BOTTOM","RIGHT","RIGHT TOP","LEFT TOP","RIGHT BOTTOM","LEFT BOTTOM"},
+            {"TOP","BOTTOM","RIGHT","RIGHT TOP","LEFT TOP","RIGHT BOTTOM","LEFT BOTTOM"},
+            {"TOP", null, null, null, null, null, null, null, null}
+    };
+    int[] piecesMinimalMove={1,2,1,1,1,1};
+    int[] piecesMaximalMove={-1,2,-1,-1,1,2};
+    String[][] piecesCaptures={
+            {"TOP","BOTTOM","RIGHT","LEFT", null, null, null, null},
+            {null, null, null, null,"RIGHT TOP","LEFT TOP","RIGHT BOTTOM","LEFT BOTTOM"},
+            {null, null, null, null,"RIGHT TOP","LEFT TOP","RIGHT BOTTOM","LEFT BOTTOM"},
+            {"TOP","BOTTOM","RIGHT","RIGHT TOP","LEFT TOP","RIGHT BOTTOM","LEFT BOTTOM"},
+            {"TOP","BOTTOM","RIGHT","RIGHT TOP","LEFT TOP","RIGHT BOTTOM","LEFT BOTTOM"},
+            {null, null, null, null,"RIGHT TOP","LEFT TOP", null, null}
+    };
+    int[] piecesMinimalCapture={1,2,1,1,1,1};
+    int[] piecesMaximalCapture={-1,2,-1,-1,1,1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +151,6 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }
-        MyDataBase partyDB= new MyDataBase(this);
         TextView gameDuration = findViewById(R.id.GameDuration);
         TextView timeRemainingToPlay = findViewById(R.id.timeRemainingToPlay);
         clockSystem clock = new clockSystem(new GameActivityCallBack() {
@@ -154,27 +196,93 @@ public class GameActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             public void run() {
                 Pieces[] myPieces={};
-                ImageView[] displayedPieces={};
-                Pieces pion = null;
+                /*for(int i=0; i<2; i++){
+                    for(int j=0; j<8; j++){
+                        String name=piecesNames[piecesPlacement[j][i]];
+                        int initApparence=piecesApparences[piecesPlacement[j][i]];
+                        String[] movements=piecesMovements[piecesPlacement[j][i]];
+                        int initPosX=i;
+                        int initPosY=j;
+                        int initMinimalMove=piecesMinimalMove[piecesPlacement[j][i]];
+                        int initMaximalMove=piecesMaximalMove[piecesPlacement[j][i]];
+                        String[] captures=piecesCaptures[piecesPlacement[j][i]];
+                        int initMinimalCapture=piecesMinimalCapture[piecesPlacement[j][i]];
+                        int initMaximalCapture=piecesMaximalCapture[piecesPlacement[j][i]];
+                        Pieces myPiece=new Pieces(
+                                name,
+                                initApparence,
+                                "North",
+                                initPosX, initPosY,
+                                movements,
+                                initMinimalMove,
+                                initMaximalMove,
+                                captures,
+                                initMinimalCapture,
+                                initMaximalCapture
+                        );
+                        int piecePosX=myPiece.GetPosX();
+                        int piecePosY=myPiece.GetPosY();
+                        echiquier[piecePosY][piecePosX].setApparence(myPiece.GetApparence());
+                        echiquier[piecePosY][piecePosX].setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                int [][] movePositions=myPiece.GetMovePositions();
+                                for (int i = 0; i < 8; i++) {
+                                    for (int j = 0; j < 8; j++) {
+                                        if(movePositions[j][i]==1){
+                                            echiquier[j][i].defColor(casesColorGreen);
+                                        }else if(movePositions[j][i]==2){
+                                            echiquier[j][i].defColor(casesColorPieceSelected);
+                                        }
+                                    }
+                                }
+                                return false;
+                            }
+                        });
+                    }
+                }*/
                 String name="pion";
                 String[] movements={"TOP", null, null, null, null, null, null, null, null};
                 String[] captures={"RIGHT TOP","LEFT TOP", null, null, null, null, null, null, null};
-                pion.CreatePiece(
-                        "pion",
+                int initPosX=0;
+                int initPosY=1;
+                int initMinimalMove=1;
+                int initMaximalMove=2;
+                int initMinimalCapture=1;
+                int initMaximalCapture=1;
+                Pieces myPiece=new Pieces(
+                        name,
                         R.drawable.black_pion,
-                        "south",
-                        1, 1,
+                        "North",
+                        initPosX, initPosY,
                         movements,
-                        1,
-                        1,
+                        initMinimalMove,
+                        initMaximalMove,
                         captures,
-                        1,
-                        1
+                        initMinimalCapture,
+                        initMaximalCapture
                 );
-                int pionPosX=pion.GetPosX();
-                int pionPosY=pion.GetPosY();
-                echiquier[pionPosX][pionPosY].setApparence(pion.GetApparence());
+                int piecePosX=myPiece.GetPosX();
+                int piecePosY=myPiece.GetPosY();
+                echiquier[piecePosY][piecePosX].setApparence(myPiece.GetApparence());
+                echiquier[piecePosY][piecePosX].setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        int [][] movePositions=myPiece.GetMovePositions();
+                        for (int i = 0; i < 8; i++) {
+                            for (int j = 0; j < 8; j++) {
+                                if(movePositions[j][i]==1){
+                                    echiquier[j][i].defColor(casesColorGreen);
+                                }else if(movePositions[j][i]==2){
+                                    echiquier[j][i].defColor(casesColorPieceSelected);
+                                }
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
+
         }).start();
     }
     protected Context getContext(){
@@ -264,6 +372,5 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
     }
 }

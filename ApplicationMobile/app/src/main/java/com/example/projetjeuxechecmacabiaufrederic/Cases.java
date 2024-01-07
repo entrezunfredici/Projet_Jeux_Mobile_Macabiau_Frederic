@@ -36,9 +36,18 @@ public class Cases extends View {
         Log.v("MyActivity","new color");
         for(int i=1; i<4; i++){
             color[i]=newColor[i];
+            refreshPaint();
         }
     }
     public void setApparence(int initApparence){
         apparence=initApparence;
+        refreshPaint();
+    }
+
+    void refreshPaint(){
+        Paint paint = new Paint();
+        paint.setARGB(color[0],color[1],color[2],color[3]);
+        paint.setStyle(Paint.Style.FILL);
+        invalidate();
     }
 }

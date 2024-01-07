@@ -34,12 +34,14 @@ public class Pieces {
             {0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0}
     };
-    public static void CreatePiece(
+    public Pieces(
             String initName, int initApparence,
             String initOrientation, int initPosX, int initPosY,
             String [] initDirectionMove, int initMinimalMove, int initMaximalMove,
             String [] initDirectionCapture, int initMinimalCapture, int initMaximalCapture
             ) {
+        super();
+        Log.d("nouvelle piece","creation");
         name=initName;
         apparence=initApparence;
         if(initOrientation=="North"){
@@ -55,169 +57,84 @@ public class Pieces {
         }else{
             maximalMove=initMaximalMove*orientation;
         }
+        Log.d("nouvelle piece","maxmove"+maximalMove+"minMove"+minimalMove);
         minimalCapture=initMinimalCapture*orientation;
         if(initMaximalCapture==-1){
             maximalCapture=8*orientation;
         }else{
             maximalCapture=initMaximalMove*orientation;
         }
-        int initDeltaMove=maximalMove-minimalMove;
-        int initDeltaCapture=maximalCapture-minimalCapture;
-        for(int i=0; i<8; i++){
-            if(initDirectionMove[i]!=null){
-                directionMove[i]=initDirectionMove[i];
-                int deltaMove=initDeltaMove;
-                switch(directionMove[i]){
+        directionMove=initDirectionMove;
+        directionCapture=initDirectionCapture;
+        setCases(movePositions, posX, posY, minimalMove, maximalMove, orientation, directionMove);
+        setCases(capturePositions, posX, posY, minimalCapture, maximalCapture, orientation, directionCapture);
+    }
+
+    static void setCases(int[][] casesToSet, int posX, int posY, int minimalDistance, int maximalDistance, int initOrientation, String[] directions){
+        casesToSet[posY][posX]=2;
+        for(int i=0; i<8; i++) {
+            if (directions[i] != null) {
+                switch (directions[i]) {
                     case "TOP":
-                        while(deltaMove!=0){
-                            deltaMove-=orientation;
-                            if((posX+deltaMove+minimalMove>0)&(posX+deltaMove+minimalMove<0)){
-                                movePositions[posY][posX+deltaMove+minimalMove]=1;
+                        for (int n = minimalDistance; n != maximalDistance + initOrientation; n += initOrientation) {
+                            if ((posY + n > 0) & (posY + n < 7)) {
+                                casesToSet[posY + n][posX] = 1;
                             }
                         }
                         break;
                     case "BOTTOM":
-                        while(deltaMove!=0){
-                            deltaMove-=orientation;
-                            if((posX-deltaMove>0)&(posX-deltaMove+minimalMove<0)){
-                                movePositions[posY][posX-deltaMove+minimalMove]=1;
+                        for (int n = minimalDistance; n != maximalDistance + initOrientation; n += initOrientation) {
+                            if ((posY - n > 0) & (posY - n < 7)) {
+                                casesToSet[posY - n][posX] = 1;
                             }
                         }
-                        break;
                     case "RIGHT":
-                        while(deltaMove!=0){
-                            deltaMove-=orientation;
-                            if((posY+deltaMove+minimalMove>0)&(posY+deltaMove+minimalMove<0)){
-                                movePositions[posY+deltaMove+minimalMove][posX]=1;
+                        for (int n = minimalDistance; n != maximalDistance + initOrientation; n += initOrientation) {
+                            if ((posX + n > 0) & (posX + n < 7)) {
+                                casesToSet[posY][posX + n] = 1;
                             }
                         }
                         break;
                     case "LEFT":
-                        while(deltaMove!=0){
-                            deltaMove-=orientation;
-                            if((posY-deltaMove+minimalMove>0)&(posY-deltaMove+minimalMove<0)){
-                                movePositions[posY-deltaMove+minimalMove][posX]=1;
+                        for (int n = minimalDistance; n != maximalDistance + initOrientation; n += initOrientation) {
+                            if ((posX - n > 0) & (posX - n < 7)) {
+                                casesToSet[posY][posX - n] = 1;
                             }
                         }
                         break;
                     case "RIGHT TOP":
-                        while(deltaMove!=0){
-                            deltaMove-=orientation;
-                            if(((posX+deltaMove+minimalMove>0)&(posX+deltaMove+minimalMove<0))
-                            &((posY+deltaMove+minimalMove>0)&(posY+deltaMove+minimalMove<0))){
-                                movePositions[posY+deltaMove+minimalMove][posX+deltaMove+minimalMove]=1;
+                        for (int n = minimalDistance; n != maximalDistance + initOrientation; n += initOrientation) {
+                            if (((posX + n > 0) & (posX + n < 7)) & ((posY + n > 0) & (posY + n < 7))) {
+                                casesToSet[posY + n][posX + n] = 1;
                             }
                         }
                         break;
                     case "LEFT TOP":
-                        while(deltaMove!=0){
-                            deltaMove-=orientation;
-                            if(((posX+deltaMove+minimalMove>0)&(posX+deltaMove+minimalMove<0))
-                                    &((posY-deltaMove+minimalMove>0)&(posY-deltaMove+minimalMove<0))){
-                                movePositions[posY-deltaMove+minimalMove][posX+deltaMove+minimalMove]=1;
+                        for (int n = minimalDistance; n != maximalDistance + initOrientation; n += initOrientation) {
+                            if (((posX - n > 0) & (posX - n < 7)) & ((posY + n > 0) & (posY + n < 7))) {
+                                casesToSet[posY + n][posX - n] = 1;
                             }
                         }
                         break;
                     case "RIGHT BOTTOM":
-                        while(deltaMove!=0){
-                            deltaMove-=orientation;
-                            if(((posX-deltaMove+minimalMove>0)&(posX-deltaMove+minimalMove<0))
-                                    &((posY+deltaMove+minimalMove>0)&(posY+deltaMove+minimalMove<0))){
-                                movePositions[posY+deltaMove+minimalMove][posX-deltaMove+minimalMove]=1;
+                        for (int n = minimalDistance; n != maximalDistance + initOrientation; n += initOrientation) {
+                            if (((posX + n > 0) & (posX + n < 7)) & ((posY - n > 0) & (posY - n < 7))) {
+                                casesToSet[posY - n][posX + n] = 1;
                             }
                         }
                         break;
                     case "LEFT BOTTOM":
-                        while(deltaMove!=0){
-                            deltaMove-=orientation;
-                            if(((posX-deltaMove+minimalMove>0)&(posX-deltaMove+minimalMove<0))
-                                    &((posY-deltaMove+minimalMove>0)&(posY-deltaMove+minimalMove<0))){
-                                movePositions[posY-deltaMove+minimalMove][posX-deltaMove+minimalMove]=1;
+                        for (int n = minimalDistance; n != maximalDistance + initOrientation; n += initOrientation) {
+                            if (((posX - n > 0) & (posX - n < 7)) & ((posY - n > 0) & (posY - n < 7))) {
+                                casesToSet[posY - n][posX - n] = 1;
                             }
                         }
                         break;
                 }
-            }else{
-                directionMove[i]="NULL";
-            }
-            if(initDirectionCapture[i]!=null){
-                directionCapture[i]=initDirectionCapture[i];
-                int deltaCapture=initDeltaCapture;
-                switch(directionCapture[i]){
-                    case "TOP":
-                        while(deltaCapture!=0){
-                            deltaCapture-=orientation;
-                            if((posX+deltaCapture+minimalCapture>0)&(posX+deltaCapture+minimalCapture<0)){
-                                capturePositions[posY][posX+deltaCapture+minimalCapture]=1;
-                            }
-                        }
-                        break;
-                    case "BOTTOM":
-                        while(deltaCapture!=0){
-                            deltaCapture-=orientation;
-                            if((posX-deltaCapture>0)&(posX-deltaCapture+minimalCapture<0)){
-                                capturePositions[posY][posX-deltaCapture+minimalCapture]=1;
-                            }
-                        }
-                        break;
-                    case "RIGHT":
-                        while(deltaCapture!=0){
-                            deltaCapture-=orientation;
-                            if((posY+deltaCapture+minimalCapture>0)&(posY+deltaCapture+minimalCapture<0)){
-                                capturePositions[posY+deltaCapture+minimalCapture][posX]=1;
-                            }
-                        }
-                        break;
-                    case "LEFT":
-                        while(deltaCapture!=0){
-                            deltaCapture-=orientation;
-                            if((posY-deltaCapture+minimalCapture>0)&(posY-deltaCapture+minimalCapture<0)){
-                                capturePositions[posY-deltaCapture+minimalCapture][posX]=1;
-                            }
-                        }
-                        break;
-                    case "RIGHT TOP":
-                        while(deltaCapture!=0){
-                            deltaCapture-=orientation;
-                            if(((posX+deltaCapture+minimalCapture>0)&(posX+deltaCapture+minimalCapture<0))
-                                    &((posY+deltaCapture+minimalCapture>0)&(posY+deltaCapture+minimalCapture<0))){
-                                capturePositions[posY+deltaCapture+minimalCapture][posX+deltaCapture+minimalCapture]=1;
-                            }
-                        }
-                        break;
-                    case "LEFT TOP":
-                        while(deltaCapture!=0){
-                            deltaCapture-=orientation;
-                            if(((posX+deltaCapture+minimalMove>0)&(posX+deltaCapture+minimalCapture<0))
-                                    &((posY-deltaCapture+minimalCapture>0)&(posY-deltaCapture+minimalCapture<0))){
-                                capturePositions[posY-deltaCapture+minimalCapture][posX+deltaCapture+minimalCapture]=1;
-                            }
-                        }
-                        break;
-                    case "RIGHT BOTTOM":
-                        while(deltaCapture!=0){
-                            deltaCapture-=orientation;
-                            if(((posX-deltaCapture+minimalCapture>0)&(posX-deltaCapture+minimalCapture<0))
-                                    &((posY+deltaCapture+minimalCapture>0)&(posY+deltaCapture+minimalCapture<0))){
-                                capturePositions[posY+deltaCapture+minimalCapture][posX-deltaCapture+minimalCapture]=1;
-                            }
-                        }
-                        break;
-                    case "LEFT BOTTOM":
-                        while(deltaCapture!=0){
-                            deltaCapture-=orientation;
-                            if(((posX-deltaCapture+minimalCapture>0)&(posX-deltaCapture+minimalCapture<0))
-                                    &((posY-deltaCapture+minimalCapture>0)&(posY-deltaCapture+minimalCapture<0))){
-                                capturePositions[posY-deltaCapture+minimalCapture][posX-deltaCapture+minimalCapture]=1;
-                            }
-                        }
-                        break;
-                }
-            }else{
-                directionCapture[i]="NULL";
             }
         }
     }
+
     public static int GetPosX(){
         return posX;
     }
@@ -236,82 +153,8 @@ public class Pieces {
                 if(movePositions[i][k]==setMovePositions[i][k]){
                     posX=newPosX;
                     posY=newPosY;
-                    int initDeltaMove=maximalMove-minimalMove;
-                    for(int j=0; j<8; j++){
-                        if(directionMove[j]!="NULL"){
-                            int deltaMove=initDeltaMove;
-                            switch(directionMove[j]){
-                                case "TOP":
-                                    while(deltaMove!=0){
-                                        deltaMove-=orientation;
-                                        if((posX+deltaMove+minimalMove>0)&(posX+deltaMove+minimalMove<0)){
-                                            movePositions[posY][posX+deltaMove+minimalMove]=1;
-                                        }
-                                    }
-                                    break;
-                                case "BOTTOM":
-                                    while(deltaMove!=0){
-                                        deltaMove-=orientation;
-                                        if((posX-deltaMove>0)&(posX-deltaMove+minimalMove<0)){
-                                            movePositions[posY][posX-deltaMove+minimalMove]=1;
-                                        }
-                                    }
-                                    break;
-                                case "RIGHT":
-                                    while(deltaMove!=0){
-                                        deltaMove-=orientation;
-                                        if((posY+deltaMove+minimalMove>0)&(posY+deltaMove+minimalMove<0)){
-                                            movePositions[posY+deltaMove+minimalMove][posX]=1;
-                                        }
-                                    }
-                                    break;
-                                case "LEFT":
-                                    while(deltaMove!=0){
-                                        deltaMove-=orientation;
-                                        if((posY-deltaMove+minimalMove>0)&(posY-deltaMove+minimalMove<0)){
-                                            movePositions[posY-deltaMove+minimalMove][posX]=1;
-                                        }
-                                    }
-                                    break;
-                                case "RIGHT TOP":
-                                    while(deltaMove!=0){
-                                        deltaMove-=orientation;
-                                        if(((posX+deltaMove+minimalMove>0)&(posX+deltaMove+minimalMove<0))
-                                                &((posY+deltaMove+minimalMove>0)&(posY+deltaMove+minimalMove<0))){
-                                            movePositions[posY+deltaMove+minimalMove][posX+deltaMove+minimalMove]=1;
-                                        }
-                                    }
-                                    break;
-                                case "LEFT TOP":
-                                    while(deltaMove!=0){
-                                        deltaMove-=orientation;
-                                        if(((posX+deltaMove+minimalMove>0)&(posX+deltaMove+minimalMove<0))
-                                                &((posY-deltaMove+minimalMove>0)&(posY-deltaMove+minimalMove<0))){
-                                            movePositions[posY-deltaMove+minimalMove][posX+deltaMove+minimalMove]=1;
-                                        }
-                                    }
-                                    break;
-                                case "RIGHT BOTTOM":
-                                    while(deltaMove!=0){
-                                        deltaMove-=orientation;
-                                        if(((posX-deltaMove+minimalMove>0)&(posX-deltaMove+minimalMove<0))
-                                                &((posY+deltaMove+minimalMove>0)&(posY+deltaMove+minimalMove<0))){
-                                            movePositions[posY+deltaMove+minimalMove][posX-deltaMove+minimalMove]=1;
-                                        }
-                                    }
-                                    break;
-                                case "LEFT BOTTOM":
-                                    while(deltaMove!=0){
-                                        deltaMove-=orientation;
-                                        if(((posX-deltaMove+minimalMove>0)&(posX-deltaMove+minimalMove<0))
-                                                &((posY-deltaMove+minimalMove>0)&(posY-deltaMove+minimalMove<0))){
-                                            movePositions[posY-deltaMove+minimalMove][posX-deltaMove+minimalMove]=1;
-                                        }
-                                    }
-                                    break;
-                            }
-                        }
-                    }
+                    setCases(movePositions, posX, posY, minimalMove, maximalMove, orientation, directionMove);
+                    setCases(capturePositions, posX, posY, minimalCapture, maximalCapture, orientation, directionCapture);
                     return 1;
                 }
             }
@@ -326,82 +169,8 @@ public class Pieces {
                 if(capturePositions[i][k]==setCapturePosition[i][k]){
                     posX=newPosX;
                     posY=newPosY;
-                    int initDeltaCapture=maximalMove-minimalMove;
-                    for(int j=0; j<8; j++){
-                        if(directionCapture[j]!="NULL"){
-                            int deltaCapture=initDeltaCapture;
-                            switch(directionCapture[j]){
-                                case "TOP":
-                                    while(deltaCapture!=0){
-                                        deltaCapture-=orientation;
-                                        if((posX+deltaCapture+minimalCapture>0)&(posX+deltaCapture+minimalCapture<0)){
-                                            capturePositions[posY][posX+deltaCapture+minimalCapture]=1;
-                                        }
-                                    }
-                                    break;
-                                case "BOTTOM":
-                                    while(deltaCapture!=0){
-                                        deltaCapture-=orientation;
-                                        if((posX-deltaCapture>0)&(posX-deltaCapture+minimalCapture<0)){
-                                            capturePositions[posY][posX-deltaCapture+minimalCapture]=1;
-                                        }
-                                    }
-                                    break;
-                                case "RIGHT":
-                                    while(deltaCapture!=0){
-                                        deltaCapture-=orientation;
-                                        if((posY+deltaCapture+minimalCapture>0)&(posY+deltaCapture+minimalCapture<0)){
-                                            capturePositions[posY+deltaCapture+minimalCapture][posX]=1;
-                                        }
-                                    }
-                                    break;
-                                case "LEFT":
-                                    while(deltaCapture!=0){
-                                        deltaCapture-=orientation;
-                                        if((posY-deltaCapture+minimalCapture>0)&(posY-deltaCapture+minimalCapture<0)){
-                                            capturePositions[posY-deltaCapture+minimalCapture][posX]=1;
-                                        }
-                                    }
-                                    break;
-                                case "RIGHT TOP":
-                                    while(deltaCapture!=0){
-                                        deltaCapture-=orientation;
-                                        if(((posX+deltaCapture+minimalCapture>0)&(posX+deltaCapture+minimalCapture<0))
-                                                &((posY+deltaCapture+minimalCapture>0)&(posY+deltaCapture+minimalCapture<0))){
-                                            capturePositions[posY+deltaCapture+minimalCapture][posX+deltaCapture+minimalCapture]=1;
-                                        }
-                                    }
-                                    break;
-                                case "LEFT TOP":
-                                    while(deltaCapture!=0){
-                                        deltaCapture-=orientation;
-                                        if(((posX+deltaCapture+minimalMove>0)&(posX+deltaCapture+minimalCapture<0))
-                                                &((posY-deltaCapture+minimalCapture>0)&(posY-deltaCapture+minimalCapture<0))){
-                                            capturePositions[posY-deltaCapture+minimalCapture][posX+deltaCapture+minimalCapture]=1;
-                                        }
-                                    }
-                                    break;
-                                case "RIGHT BOTTOM":
-                                    while(deltaCapture!=0){
-                                        deltaCapture-=orientation;
-                                        if(((posX-deltaCapture+minimalCapture>0)&(posX-deltaCapture+minimalCapture<0))
-                                                &((posY+deltaCapture+minimalCapture>0)&(posY+deltaCapture+minimalCapture<0))){
-                                            capturePositions[posY+deltaCapture+minimalCapture][posX-deltaCapture+minimalCapture]=1;
-                                        }
-                                    }
-                                    break;
-                                case "LEFT BOTTOM":
-                                    while(deltaCapture!=0){
-                                        deltaCapture-=orientation;
-                                        if(((posX-deltaCapture+minimalCapture>0)&(posX-deltaCapture+minimalCapture<0))
-                                                &((posY-deltaCapture+minimalCapture>0)&(posY-deltaCapture+minimalCapture<0))){
-                                            capturePositions[posY-deltaCapture+minimalCapture][posX-deltaCapture+minimalCapture]=1;
-                                        }
-                                    }
-                                    break;
-                            }
-                        }
-                    }
+                    setCases(movePositions, posX, posY, minimalMove, maximalMove, orientation, directionMove);
+                    setCases(capturePositions, posX, posY, minimalCapture, maximalCapture, orientation, directionCapture);
                     return 1;
                 }
             }
