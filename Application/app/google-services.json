@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "74021560792",
+    "project_id": "jeuxechecsenligne2024",
+    "storage_bucket": "jeuxechecsenligne2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74021560792:android:fd9b59e9f5c03158de92ad",
+        "android_client_info": {
+          "package_name": "com.example.projetjeuxechecs2024"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTlbSfJGiuFOBrl-aI1xvD3IRA5RPSM8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

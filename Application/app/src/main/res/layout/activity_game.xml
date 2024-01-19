@@ -1,0 +1,1413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout23"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout21"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/player"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Wait"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/arbitrageValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/arbitrageValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="Name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/timeRemainingToPlay"
+                app:layout_constraintStart_toEndOf="@+id/player"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/timeRemainingToPlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="00:00"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/GameDuration"
+                app:layout_constraintStart_toEndOf="@+id/arbitrageValue"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/GameDuration"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="00:00"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/timeRemainingToPlay"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout21"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout23">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/LineTop"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineHeight"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout17"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout16"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout16"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout15"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout17"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/zeroA"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="A" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout15"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout16"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/zeroB"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="B" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout6"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout13"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout15"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/zeroC"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="C" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout13"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout12"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout6"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/zeroD"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="D" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout12"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout11"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout13"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/zeroE"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="E" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout11"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout10"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout12"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/zeroF"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="F" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout10"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout9"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout11"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/zeroG"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="G" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout9"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout8"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout10"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/zeroH"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="H" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout8"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout9"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineHeight"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineSeven"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineTop">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/LineTwoRowOne"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case8A"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="8" />
+                        </LinearLayout>
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case8A"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case8B"
+                            app:layout_constraintStart_toEndOf="@+id/LineTwoRowOne"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case8B"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case8C"
+                            app:layout_constraintStart_toEndOf="@+id/Case8A"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case8C"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case8D"
+                            app:layout_constraintStart_toEndOf="@+id/Case8B"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case8D"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case8E"
+                            app:layout_constraintStart_toEndOf="@+id/Case8C"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case8E"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case8F"
+                            app:layout_constraintStart_toEndOf="@+id/Case8D"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case8F"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case8G"
+                            app:layout_constraintStart_toEndOf="@+id/Case8E"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case8G"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case8H"
+                            app:layout_constraintStart_toEndOf="@+id/Case8F"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case8H"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                            app:layout_constraintStart_toEndOf="@+id/Case8G"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/Case8H"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="8" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineSeven"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineSix"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineHeight">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout54"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout70"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView24"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="7" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout70"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout69"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout54"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.example.projetjeuxechecs2024.objects.Cases
+                                android:id="@+id/Case7A"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout69"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout67"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout70"
+                            app:layout_constraintTop_toTopOf="parent">
+                            <com.example.projetjeuxechecs2024.objects.Cases
+                                android:id="@+id/Case7B"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout67"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout66"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout69"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.example.projetjeuxechecs2024.objects.Cases
+                                android:id="@+id/Case7C"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout66"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout62"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout67"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.example.projetjeuxechecs2024.objects.Cases
+                                android:id="@+id/Case7D"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout62"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout60"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout66"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.example.projetjeuxechecs2024.objects.Cases
+                                android:id="@+id/Case7E"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout60"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout59"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout62"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.example.projetjeuxechecs2024.objects.Cases
+                                android:id="@+id/Case7F"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout59"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout56"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout60"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.example.projetjeuxechecs2024.objects.Cases
+                                android:id="@+id/Case7G"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout56"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout53"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout59"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.example.projetjeuxechecs2024.objects.Cases
+                                android:id="@+id/Case7H"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout53"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout56"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView23"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="7" />
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineSix"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineFive"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineSeven">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout4"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case6A"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView22"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="6" />
+                        </LinearLayout>
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case6A"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case6B"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case6B"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case6C"
+                            app:layout_constraintStart_toEndOf="@+id/Case6A"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case6C"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case6D"
+                            app:layout_constraintStart_toEndOf="@+id/Case6B"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case6D"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case6E"
+                            app:layout_constraintStart_toEndOf="@+id/Case6C"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case6E"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case6F"
+                            app:layout_constraintStart_toEndOf="@+id/Case6D"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case6F"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case6G"
+                            app:layout_constraintStart_toEndOf="@+id/Case6E"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case6G"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case6H"
+                            app:layout_constraintStart_toEndOf="@+id/Case6F"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case6H"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView2"
+                            app:layout_constraintStart_toEndOf="@+id/Case6G"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="6"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/Case6H"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineFive"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineFour"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineSix">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="5"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case5A"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case5A"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case5B"
+                            app:layout_constraintStart_toEndOf="@+id/textView21"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case5B"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case5C"
+                            app:layout_constraintStart_toEndOf="@+id/Case5A"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case5C"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case5D"
+                            app:layout_constraintStart_toEndOf="@+id/Case5B"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case5D"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case5E"
+                            app:layout_constraintStart_toEndOf="@+id/Case5C"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case5E"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case5F"
+                            app:layout_constraintStart_toEndOf="@+id/Case5D"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case5F"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case5G"
+                            app:layout_constraintStart_toEndOf="@+id/Case5E"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case5G"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case5H"
+                            app:layout_constraintStart_toEndOf="@+id/Case5F"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case5H"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/TextFive"
+                            app:layout_constraintStart_toEndOf="@+id/Case5G"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/TextFive"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="5"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/Case5H"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineFour"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineThree"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineFive">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="4"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case4A"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case4A"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case4B"
+                            app:layout_constraintStart_toEndOf="@+id/textView4"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case4B"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case4C"
+                            app:layout_constraintStart_toEndOf="@+id/Case4A"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case4C"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case4D"
+                            app:layout_constraintStart_toEndOf="@+id/Case4B"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case4D"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case4E"
+                            app:layout_constraintStart_toEndOf="@+id/Case4C"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case4E"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case4F"
+                            app:layout_constraintStart_toEndOf="@+id/Case4D"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case4F"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case4G"
+                            app:layout_constraintStart_toEndOf="@+id/Case4E"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case4G"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case4H"
+                            app:layout_constraintStart_toEndOf="@+id/Case4F"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case4H"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView18"
+                            app:layout_constraintStart_toEndOf="@+id/Case4G"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="4"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/Case4H"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineThree"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineTwo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineFour">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="3"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case3A"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case3A"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case3B"
+                            app:layout_constraintStart_toEndOf="@+id/textView17"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case3B"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case3C"
+                            app:layout_constraintStart_toEndOf="@+id/Case3A"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case3C"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case3D"
+                            app:layout_constraintStart_toEndOf="@+id/Case3B"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case3D"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case3E"
+                            app:layout_constraintStart_toEndOf="@+id/Case3C"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case3E"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case3F"
+                            app:layout_constraintStart_toEndOf="@+id/Case3D"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case3F"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case3G"
+                            app:layout_constraintStart_toEndOf="@+id/Case3E"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case3G"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case3H"
+                            app:layout_constraintStart_toEndOf="@+id/Case3F"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case3H"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView16"
+                            app:layout_constraintStart_toEndOf="@+id/Case3G"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="3"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/Case3H"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineOne"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineThree">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="2"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case2A"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case2A"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case2B"
+                            app:layout_constraintStart_toEndOf="@+id/textView19"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case2B"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case2C"
+                            app:layout_constraintStart_toEndOf="@+id/Case2A"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case2C"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case2D"
+                            app:layout_constraintStart_toEndOf="@+id/Case2B"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case2D"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case2E"
+                            app:layout_constraintStart_toEndOf="@+id/Case2C"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case2E"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case2F"
+                            app:layout_constraintStart_toEndOf="@+id/Case2D"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case2F"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case2G"
+                            app:layout_constraintStart_toEndOf="@+id/Case2E"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case2G"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case2H"
+                            app:layout_constraintStart_toEndOf="@+id/Case2F"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case2H"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Text"
+                            app:layout_constraintStart_toEndOf="@+id/Case2G"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/Text"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="2"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/Case2H"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineOne"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/LineBottom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineTwo">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView20"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case1A"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case1A"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case1B"
+                            app:layout_constraintStart_toEndOf="@+id/textView20"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case1B"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case1C"
+                            app:layout_constraintStart_toEndOf="@+id/Case1A"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case1C"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case1D"
+                            app:layout_constraintStart_toEndOf="@+id/Case1B"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case1D"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case1E"
+                            app:layout_constraintStart_toEndOf="@+id/Case1C"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case1E"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case1F"
+                            app:layout_constraintStart_toEndOf="@+id/Case1D"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case1F"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case1G"
+                            app:layout_constraintStart_toEndOf="@+id/Case1E"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case1G"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/Case1H"
+                            app:layout_constraintStart_toEndOf="@+id/Case1F"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.example.projetjeuxechecs2024.objects.Cases
+                            android:id="@+id/Case1H"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textView15"
+                            app:layout_constraintStart_toEndOf="@+id/Case1G"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/Case1H"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LineBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LineOne">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout30"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout40"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout40"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout30"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView14"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="A" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout38"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout40"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView13"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="B" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout38"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout37"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView12"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="C" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout37"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout36"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout38"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView11"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="D" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout36"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout35"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout37"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="E" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout35"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout34"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout36"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="F" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout34"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout32"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout35"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="G" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout32"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/linearLayout31"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout34"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="H" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout31"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/linearLayout32"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout22"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout21">
+
+        <Button
+            android:id="@+id/btnDiscontinuedParty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="discontinued" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
