@@ -110,7 +110,6 @@ public class FireBaseController {
     }
 
     public static void connectToAnHost(String hostName){
-        //clockSystem clock = new clockSystem(1000);
         players_status = database.getReference(hostName+"players");
         players_status.setValue(2);
     }

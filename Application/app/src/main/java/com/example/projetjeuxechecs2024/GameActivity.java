@@ -55,13 +55,22 @@ public class GameActivity extends AppCompatActivity{
     String[] piecesNames={
             "tour","cavalier","fou","reine","roi","pion",
     };
-    int[] piecesApparences={
+    int[] blackPiecesApparences={
             R.drawable.black_tour,
             R.drawable.black_cavalier,
             R.drawable.black_fou,
             R.drawable.black_reine,
             R.drawable.black_roi,
             R.drawable.black_pion,
+    };
+
+    int[] whitePiecesApparences={
+            R.drawable.white_tour,
+            R.drawable.white_cavalier,
+            R.drawable.white_fou,
+            R.drawable.white_reine,
+            R.drawable.white_roi,
+            R.drawable.white_pion,
     };
     String[][] piecesMovements={
             {"TOP","BOTTOM","RIGHT","LEFT", null, null, null, null},
@@ -85,6 +94,8 @@ public class GameActivity extends AppCompatActivity{
     int[] piecesMaximalCapture={-1,2,-1,-1,1,1};
 
     static FireBaseController fireBaseController;
+
+    static String[] finalPiecesColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,9 +151,6 @@ public class GameActivity extends AppCompatActivity{
         }
         TextView gameDuration = findViewById(R.id.GameDuration);
         TextView timeRemainingToPlay = findViewById(R.id.timeRemainingToPlay);
-        startParty[0] = TRUE;
-
-        clockSystem clock = new clockSystem(1000);
         clock.initGameCallBAck(new GameActivityCallBack() {
             @Override
             public void timerCall() {
@@ -190,10 +198,21 @@ public class GameActivity extends AppCompatActivity{
             container piecesContainer = new container();
             public void run() {
                 Log.d("container positions cases","test");
+                int k=0;
                 for(int i=0; i<2; i++){
                     for(int j=0; j<8; j++){
                         String name=piecesNames[piecesPlacement[i][j]];
-                        int initApparence=piecesApparences[piecesPlacement[i][j]];
+                        int initApparence = blackPiecesApparences[piecesPlacement[i][j]];
+                        switch(finalPiecesColor[k]){
+                            case "black":
+                                initApparence=blackPiecesApparences[piecesPlacement[i][j]];
+                                break;
+                            case "white":
+                                initApparence=whitePiecesApparences[piecesPlacement[i][j]];
+                                break;
+                            default:
+                                Log.d("errror", finalPiecesColor[k]+"doesn't exist");
+                        }
                         String[] movements=piecesMovements[piecesPlacement[i][j]];
                         int initPosX=j;
                         int initPosY=i;
@@ -218,7 +237,7 @@ public class GameActivity extends AppCompatActivity{
                         Pieces tailPiece=piecesContainer.ContainerGetTail();
                         int posY=tailPiece.GetPosY();
                         int posX=tailPiece.GetPosX();
-                        echiquier[posY][posX].setApparence(piecesApparences[piecesPlacement[posY][posX]]);
+                        echiquier[posY][posX].setApparence(tailPiece.GetApparence());
                         echiquier[posY][posX].setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View v, MotionEvent event) {
@@ -305,7 +324,7 @@ public class GameActivity extends AppCompatActivity{
             piecesColor[0]="black";
             piecesColor[1]="white";
         }
-        String[] finalPiecesColor = piecesColor;
+        finalPiecesColor = piecesColor;
 
         new Thread(new Runnable() {
             public void run() {
@@ -317,5 +336,10 @@ public class GameActivity extends AppCompatActivity{
     static public void connectToAnHost(String hostName, Context context, clockSystem initClock){
         clock=initClock;
         fireBaseController = new FireBaseController(context);
+        new Thread(new Runnable() {
+            public void run() {
+                fireBaseController.connectToAnHost(hostName);
+            }
+        }).start();
     }
 }
